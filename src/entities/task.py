@@ -1,0 +1,60 @@
+from dataclasses import dataclass
+from datetime import datetime
+from enum import Enum
+from typing import List, Optional
+from uuid import UUID
+
+from src.entities.exceptions.invalid_entity_exception import InvalidEntityException
+from src.entities.generic_entity import GenericEntity
+
+
+class TaskStatus(Enum):
+    TODO = 1
+    IN_PROGRESS = 2
+    DONE = 3
+
+
+@dataclass
+class TaskHistory:
+    id: UUID
+    created_at: datetime
+    progress: float
+    files: List[str]
+
+
+@dataclass
+class Task(GenericEntity):
+    planned_start_date: Optional[datetime]
+    planned_end_date: Optional[datetime]
+    actual_start_date: Optional[datetime]
+    actual_end_date: Optional[datetime]
+    status: TaskStatus
+    progress: float
+    files: List[str]
+    task_history: List[TaskHistory]
+
+    def __post_init__(self):
+        invalid_fields = []
+
+        if self.planned_start_date and self.planned_end_date:
+            if self.planned_start_date > self.planned_end_date:
+                invalid_fields.append("planned_start_date")
+                invalid_fields.append("planned_end_date")
+
+        if self.actual_start_date and self.actual_end_date:
+            if self.actual_start_date > self.actual_end_date:
+                invalid_fields.append("actual_start_date")
+                invalid_fields.append("actual_end_date")
+
+        if self.progress is None or self.progress < 0 or self.progress > 100:
+            invalid_fields.append("progress")
+
+        if not self.status:
+            invalid_fields.append("status")
+
+        if invalid_fields:
+            raise InvalidEntityException("Task", invalid_fields)
+
+    def add_task_history(self, task_history: TaskHistory):
+        self.progress = task_history.progress
+        self.task_history.append(task_history)
