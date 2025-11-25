@@ -5,8 +5,23 @@ from sqlalchemy.orm import relationship
 from src.adapters.postgres.dto import Base
 from sqlalchemy import Column, Integer, String, UUID, ForeignKey, DateTime
 
-from src.adapters.postgres.dto.workspace_users_db import WorkspaceUsersDB
 from src.entities.workspace import Workspace
+
+
+class WorkspaceUsersDB(Base):
+    __tablename__ = "workspace_has_user"
+    workspace_id = Column(UUID, ForeignKey("workspace.id"), primary_key=True)
+    user_id = Column(UUID, ForeignKey("user.id"), primary_key=True)
+
+    def __init__(self, workspace_id: UUID, user_id: UUID):
+        self.workspace_id = workspace_id
+        self.user_id = user_id
+
+    def to_entity(self):
+        pass
+
+    def update_attributes(self, entity):
+        pass
 
 
 class WorkspaceDB(Base[Workspace]):
