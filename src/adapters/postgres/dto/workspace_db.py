@@ -9,7 +9,7 @@ from src.adapters.postgres.dto.workspace_users_db import WorkspaceUsersDB
 from src.entities.workspace import Workspace
 
 
-class WorkspaceDB(Base):
+class WorkspaceDB(Base[Workspace]):
     __tablename__ = 'workspace'
 
     id = Column(UUID, primary_key=True)
@@ -28,6 +28,9 @@ class WorkspaceDB(Base):
                          primaryjoin="WorkspaceDB.id == WorkspaceUsersDB.workspace_id")
 
     def __init__(self, workspace: Workspace):
+        self.update_attributes(workspace)
+
+    def update_attributes(self, workspace: Workspace):
         self.id = workspace.id
         self.name = workspace.name
         self.created_at = workspace.created_at

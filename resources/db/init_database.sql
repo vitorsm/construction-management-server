@@ -2,7 +2,7 @@
 CREATE TABLE "user" (
     id UUID NOT NULL,
     name TEXT NOT NULL,
-    login VARCHAR(100) NOT NULL,
+    login VARCHAR(100) NOT NULL UNIQUE,
     password TEXT NOT NULL,
 
     PRIMARY KEY (id)
@@ -120,8 +120,11 @@ CREATE TABLE task_history (
     id UUID NOT NULL,
     task_id UUID NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    created_by UUID NOT NULL,
     progress FLOAT NOT NULL,
+    notes TEXT NULL,
 
     PRIMARY KEY (id),
-    FOREIGN KEY (task_id) REFERENCES task(id)
+    FOREIGN KEY (task_id) REFERENCES task(id),
+    FOREIGN KEY (created_by) REFERENCES user(id)
 );

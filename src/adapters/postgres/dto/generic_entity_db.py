@@ -41,7 +41,7 @@ class GenericEntityDB:
 
     @declared_attr
     def workspace_db(cls):
-        return relationship("WorkspaceDB", foreign_keys=[cls.workspace_id], lazy="joined")
+        return relationship("WorkspaceDB", foreign_keys=[cls.workspace_id])
 
     @declared_attr
     def created_by_db(cls):
@@ -52,6 +52,12 @@ class GenericEntityDB:
         return relationship("UserDB", foreign_keys=[cls.updated_by], lazy="joined")
 
     def __init__(self, generic_entity: GenericEntity):
+        self.__update_attributes(generic_entity)
+
+    def update_attributes(self, generic_entity: GenericEntity):
+        self.__update_attributes(generic_entity)
+
+    def __update_attributes(self, generic_entity: GenericEntity):
         self.id = generic_entity.id
         self.name = generic_entity.name
         self.workspace_id = generic_entity.workspace.id

@@ -6,6 +6,7 @@ from uuid import UUID
 
 from src.entities.exceptions.invalid_entity_exception import InvalidEntityException
 from src.entities.generic_entity import GenericEntity
+from src.entities.user import User
 
 
 class TaskStatus(Enum):
@@ -18,8 +19,10 @@ class TaskStatus(Enum):
 class TaskHistory:
     id: UUID
     created_at: datetime
+    created_by: User
     progress: float
     files: List[str]
+    notes: Optional[str]
 
 
 @dataclass

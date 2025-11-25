@@ -3,7 +3,7 @@ import uuid
 from sqlalchemy import Column, String, Float, UUID, ForeignKey
 from sqlalchemy.orm import relationship
 
-from src.adapters.postgres.dto import Base
+from src.adapters.postgres.dto import Base, Entity
 from src.adapters.postgres.dto.generic_entity_db import GenericEntityDB
 from src.entities.expense import Expense, ExpenseType, ExpenseClass
 from src.utils import enum_utils
@@ -13,24 +13,35 @@ class ExpenseItemDB(Base):
     __tablename__ = "expense_has_item"
     expense_id = Column(UUID, ForeignKey("expense.id"), primary_key=True)
     item_id = Column(UUID, ForeignKey("item.id"), primary_key=True)
+
     item_db = relationship("ItemDB", foreign_keys=[item_id], lazy="joined")
 
     def __init__(self, expense_id: uuid.UUID, item_id: uuid.UUID):
         self.expense_id = expense_id
         self.item_id = item_id
 
+    def to_entity(self) -> Entity:
+        pass
 
-class ExpenseDB(GenericEntityDB, Base):
+    def update_attributes(self, entity: Entity):
+        pass
+
+
+class ExpenseDB(GenericEntityDB, Base[Expense]):
     __tablename__ = "expense"
     expense_type = Column(String(100), nullable=False)
     expense_class = Column(String(100), nullable=False)
     value = Column(Float, nullable=False)
     # files: List[str]
     notes = Column(String, nullable=True)
-    items = relationship("ExpenseItemDB", lazy="select")
+    items = relationship("ExpenseItemDB", lazy="select", cascade="all, delete-orphan")
 
     def __init__(self, expense: Expense):
         super().__init__(expense)
+        self.update_attributes(expense)
+
+    def update_attributes(self, expense: Expense):
+        super().update_attributes(expense)
         self.expense_type = expense.expense_type.name
         self.expense_class = expense.expense_class.name
         self.value = expense.value

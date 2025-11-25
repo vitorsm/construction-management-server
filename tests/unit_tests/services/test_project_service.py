@@ -1,3 +1,4 @@
+from unittest import TestCase
 from unittest.mock import Mock
 
 from src.entities.generic_entity import GenericEntity
@@ -11,7 +12,7 @@ from tests.mocks import project_mock
 from tests.unit_tests.services.generic_service_test import GenericServiceTest
 
 
-class TestProjectService(GenericServiceTest):
+class TestProjectService(GenericServiceTest, TestCase):
 
     def setUp(self):
         self.authentication_repository = Mock(spec_set=AuthenticationRepository)

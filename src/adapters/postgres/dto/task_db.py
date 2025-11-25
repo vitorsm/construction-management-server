@@ -2,11 +2,12 @@ from sqlalchemy import Column, DateTime, String, Float
 
 from src.adapters.postgres.dto import Base
 from src.adapters.postgres.dto.generic_entity_db import GenericEntityDB
+from src.entities.generic_entity import GenericEntity
 from src.entities.task import Task, TaskStatus
 from src.utils import enum_utils
 
 
-class TaskDB(GenericEntityDB, Base):
+class TaskDB(GenericEntityDB, Base[Task]):
     __tablename__ = "task"
     planned_start_date = Column(DateTime, nullable=True)
     planned_end_date = Column(DateTime, nullable=True)
@@ -19,6 +20,10 @@ class TaskDB(GenericEntityDB, Base):
 
     def __init__(self, task: Task):
         super().__init__(task)
+        self.update_attributes(task)
+
+    def update_attributes(self, task: Task):
+        super().update_attributes(task)
         self.planned_start_date = task.planned_start_date
         self.planned_end_date = task.planned_end_date
         self.actual_start_date = task.actual_start_date

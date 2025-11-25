@@ -1,5 +1,4 @@
 import abc
-from unittest import TestCase
 from unittest.mock import Mock
 
 from src.entities.exceptions.entity_not_found_exception import EntityNotFoundException
@@ -10,7 +9,7 @@ from src.service.generic_service import GenericService
 from tests.mocks import user_mock, workspace_mock
 
 
-class GenericServiceTest(TestCase, metaclass=abc.ABCMeta):
+class GenericServiceTest(metaclass=abc.ABCMeta):
 
     def setUp(self):
         self.current_user = user_mock.get_valid_user()

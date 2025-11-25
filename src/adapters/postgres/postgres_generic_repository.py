@@ -1,23 +1,25 @@
 import abc
-from typing import Generic, TypeVar, get_args, Type
+from typing import Generic, TypeVar, get_args, Type, Optional
+from uuid import UUID
 
-from sqlalchemy import Engine, create_engine
+from sqlalchemy import Engine, create_engine, and_
+from sqlalchemy.exc import NoResultFound
 from sqlalchemy.orm import sessionmaker, Session
 
-from src.adapters.postgres.dto.generic_entity_db import GenericEntityDB
+from src.adapters.postgres.dto import Base
 from src.entities.generic_entity import GenericEntity
+from src.service.ports.generic_entity_repository import GenericEntityRepository
+
 
 Entity = TypeVar("Entity", bound=GenericEntity)
-DBModel = TypeVar("DBModel", bound=GenericEntityDB)
+DBModel = TypeVar("DBModel", bound=Base)
 
-class PostgresGenericRepository(Generic[Entity, DBModel], metaclass=abc.ABCMeta):
-    db_engine = None
 
+class PostgresGenericRepository(GenericEntityRepository, Generic[Entity, DBModel], metaclass=abc.ABCMeta):
+
+    @abc.abstractmethod
     def get_db_engine(self) -> Engine:
-        if not PostgresGenericRepository.db_engine:
-            PostgresGenericRepository.db_engine = create_engine("postgresql+psycopg2://postgres:postgres@localhost:5432/construction_management")
-
-        return PostgresGenericRepository.db_engine
+        raise NotImplementedError
 
     def get_session(self) -> Session:
         return sessionmaker(autocommit=False, autoflush=False, bind=self.get_db_engine())()
@@ -29,8 +31,38 @@ class PostgresGenericRepository(Generic[Entity, DBModel], metaclass=abc.ABCMeta)
         session.add(entity_db)
         session.commit()
 
-    def __get_entity_type(self) -> Type:
+    def update(self, entity: Entity):
+        session = self.get_session()
+        entity_db = session.get_one(self.__get_db_model_type(), entity.id)
+        entity_db.update_attributes(entity)
+        session.commit()
+
+    def delete(self, entity: Entity):
+        session = self.get_session()
+        entity_db = session.get_one(self.__get_db_model_type(), entity.id)
+        session.delete(entity_db)
+        session.commit()
+
+    def find_by_id(self, entity_id: UUID) -> Optional[Entity]:
+        session = self.get_session()
+        model_type = self.__get_db_model_type()
+
+        try:
+            entity_db = session.get_one(model_type, entity_id)
+        except NoResultFound:
+            return None
+
+        return entity_db.to_entity()
+
+    def find_all(self, workspace_id: UUID) -> list[Entity]:
+        session = self.get_session()
+        entity_type = self.__get_db_model_type()
+        entities_db = session.query(self.__get_db_model_type()).filter(and_(entity_type.workspace_id == workspace_id,
+                                                                            entity_type.deleted_at == None)).all()
+        return [entity_db.to_entity() for entity_db in entities_db]
+
+    def __get_entity_type(self) -> Type[Entity]:
         return get_args(self.__orig_bases__[0])[0]
 
-    def __get_db_model_type(self) -> Type:
+    def __get_db_model_type(self) -> Type[DBModel]:
         return get_args(self.__orig_bases__[0])[1]

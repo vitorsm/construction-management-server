@@ -1,3 +1,4 @@
+from unittest import TestCase
 from unittest.mock import Mock
 
 from src.entities.exceptions.entity_not_found_exception import EntityNotFoundException
@@ -13,7 +14,7 @@ from tests.mocks import task_mock
 from tests.unit_tests.services.generic_service_test import GenericServiceTest
 
 
-class TestTaskService(GenericServiceTest):
+class TestTaskService(GenericServiceTest, TestCase):
     def setUp(self):
         self.authentication_repository = Mock(spec_set=AuthenticationRepository)
         self.workspace_repository = Mock(spec_set=WorkspaceRepository)
