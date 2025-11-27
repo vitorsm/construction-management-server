@@ -7,3 +7,5 @@ class PermissionException(Exception):
 
     def __init__(self, workspace: Workspace, user: User):
         super().__init__(f"User {user.id} does not have permission for workspace {workspace.id}")
+        self.user = user
+        self.workspace = workspace

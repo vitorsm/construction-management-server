@@ -1,5 +1,6 @@
 import abc
 from unittest.mock import Mock
+from uuid import uuid4
 
 from src.entities.exceptions.entity_not_found_exception import EntityNotFoundException
 from src.entities.exceptions.invalid_entity_exception import InvalidEntityException

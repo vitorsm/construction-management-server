@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Optional
+from typing import Optional, List
 
 from src.entities.exceptions.invalid_entity_exception import InvalidEntityException
 from src.entities.generic_entity import GenericEntity
@@ -9,6 +9,13 @@ from src.entities.generic_entity import GenericEntity
 class Project(GenericEntity):
     budget: Optional[float]
 
-    def __post_init__(self):
+    def _get_invalid_fields(self) -> List[str]:
+        invalid_fields = []
+        if not self.name:
+            invalid_fields.append("name")
         if self.budget and self.budget < 0:
-            raise InvalidEntityException("Project", ["budget"])
+            invalid_fields.append("budget")
+        if not self.workspace or not self.workspace.id:
+            invalid_fields.append("workspace")
+
+        return invalid_fields

@@ -9,10 +9,11 @@ from tests.mocks import user_mock, workspace_mock, FIRST_DEFAULT_ID, DEFAULT_CRE
 now = datetime.now()
 
 
-def get_valid_item(iid: UUID = uuid4(), name: str = "Item 1", workspace: Workspace = workspace_mock.get_valid_workspace(),
+def get_valid_item(iid: UUID = None, name: str = "Item 1", workspace: Workspace = workspace_mock.get_valid_workspace(),
                    created_at: datetime = now, deleted_at: datetime = None, updated_at: datetime = now,
                    created_by: User = user_mock.get_valid_user(), updated_by: User = user_mock.get_valid_user(),
                    unit_of_measure: str = "kg") -> Item:
+    iid = iid if iid is not None else uuid4()
 
     return Item(id=iid, name=name, workspace=workspace, created_at=created_at, updated_at=updated_at, deleted_at=deleted_at,
                 created_by=created_by, updated_by=updated_by, unit_of_measurement=unit_of_measure)

@@ -9,9 +9,10 @@ from tests.mocks import user_mock, FIRST_DEFAULT_ID, DEFAULT_CREATED_AT, DEFAULT
 now = datetime.now()
 
 
-def get_valid_workspace(wid: UUID = uuid4(), name: str = "Workspace 1", created_at: datetime = DEFAULT_CREATED_AT,
+def get_valid_workspace(wid: UUID = None, name: str = "Workspace 1", created_at: datetime = DEFAULT_CREATED_AT,
                         updated_at: datetime = DEFAULT_UPDATED_AT, created_by: User = user_mock.get_valid_user(),
                         updated_by: User = user_mock.get_valid_user(), user_ids: List[UUID] = None) -> Workspace:
+    wid = wid if wid is not None else uuid4()
     user_ids = user_ids if user_ids is not None else []
 
     return Workspace(id=wid, name=name, created_at=created_at, updated_at=updated_at,

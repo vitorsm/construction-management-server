@@ -53,8 +53,13 @@ class ExpenseDB(GenericEntityDB, Base[Expense]):
         expense_class = enum_utils.instantiate_enum_from_str_name(ExpenseClass, self.expense_class)
         items = [item.item_db.to_entity() for item in self.items]
 
-        expense = Expense(id=None, name=None, workspace=None, created_at=None, updated_at=None, deleted_at=None,
-                          created_by=None, updated_by=None, expense_type=expense_type, expense_class=expense_class,
-                          items=items, value=self.value, files=[], notes=self.notes)
+        expense = object.__new__(Expense)
+        expense.expense_type = expense_type
+        expense.expense_class = expense_class
+        expense.items = items
+        expense.value = self.value
+        expense.files = []
+        expense.notes = self.notes
+
         self.fill_entity(expense)
         return expense

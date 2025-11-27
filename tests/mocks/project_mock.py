@@ -9,11 +9,12 @@ from tests.mocks import workspace_mock, user_mock, FIRST_DEFAULT_ID, DEFAULT_CRE
 now = datetime.now()
 
 
-def get_valid_project(pid: UUID = uuid4(), name: str = "Project 1",
+def get_valid_project(pid: UUID = None, name: str = "Project 1",
                       workspace: Workspace = workspace_mock.get_valid_workspace(), created_at: datetime = now,
                       updated_at: datetime = now, deleted_at: datetime = None,
                       created_by: User = user_mock.get_valid_user(), updated_by: User = user_mock.get_valid_user(),
                       budget: float = 10000.0) -> Project:
+    pid = pid if pid is not None else uuid4()
     return Project(id=pid, name=name, workspace=workspace, created_at=created_at, updated_at=updated_at,
                    deleted_at=deleted_at, created_by=created_by, updated_by=updated_by, budget=budget)
 

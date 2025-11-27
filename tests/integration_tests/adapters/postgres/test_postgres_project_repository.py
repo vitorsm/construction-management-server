@@ -5,15 +5,15 @@ from src.adapters.postgres.postgres_project_repository import PostgresProjectRep
 from src.entities.generic_entity import GenericEntity
 from src.entities.project import Project
 from tests.integration_tests.adapters.postgres.generic_entity_repository_test import GenericEntityRepositoryTest
-from tests.integration_tests.base_integration_test import BaseIntegrationTest
+from tests.integration_tests.base_sql_alchemy_test import BaseSQLAlchemyTest
 from tests.mocks import project_mock, user_mock, SECOND_DEFAULT_ID
 
 
-class TestPostgresProjectRepository(GenericEntityRepositoryTest, BaseIntegrationTest):
+class TestPostgresProjectRepository(GenericEntityRepositoryTest, BaseSQLAlchemyTest):
 
     def setUp(self):
         super().setUp()
-        self.repository = PostgresProjectRepository(self.db_engine)
+        self.repository = PostgresProjectRepository(self.db_instance)
 
     def get_repository(self) -> PostgresGenericRepository:
         return self.repository

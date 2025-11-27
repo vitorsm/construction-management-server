@@ -31,15 +31,22 @@ class Expense(GenericEntity):
     files: List[str]
     notes: Optional[str]
 
-    def __post_init__(self):
+    def _get_invalid_fields(self) -> List[str]:
         invalid_fields = []
 
+        if not self.name:
+            invalid_fields.append("name")
+        if not self.workspace or not self.workspace.id:
+            invalid_fields.append("workspace")
         if not self.expense_type:
             invalid_fields.append("expense_type")
         if not self.expense_class:
             invalid_fields.append("expense_class")
         if not self.value:
             invalid_fields.append("value")
+        if self.items and any(not item.id for item in self.items):
+            invalid_fields.append("items")
+        if not isinstance(self.value, (int, float)) or self.value < 0:
+            invalid_fields.append("value")
 
-        if invalid_fields:
-            raise InvalidEntityException("Expense", invalid_fields)
+        return invalid_fields

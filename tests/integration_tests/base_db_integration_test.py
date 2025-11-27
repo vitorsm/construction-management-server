@@ -1,24 +1,19 @@
 import os
-from unittest import TestCase
 
-from sqlalchemy import create_engine, text
+from sqlalchemy import text
 from sqlalchemy.orm import Session, sessionmaker
 
 from src.adapters.postgres.dto import Base
 from src.utils import file_utils
 
 
-class BaseIntegrationTest(TestCase):
-    def setUp(self):
-        self.db_engine = create_engine("sqlite:///:memory:")
-        self.__init_database()
-
-    def tearDown(self):
+class BaseDBIntegrationTest:
+    def clear_database(self):
         Base.metadata.drop_all(bind=self.db_engine)
 
-    def __init_database(self):
-        db_structure_file_path = os.path.join(file_utils.get_project_root(), "resources","db", "init_database.sql")
-        db_data_file_path = os.path.join(file_utils.get_project_root(), "resources","db", "init_database_load.sql")
+    def _init_database(self):
+        db_structure_file_path = os.path.join(file_utils.get_project_root(), "resources", "db", "init_database.sql")
+        db_data_file_path = os.path.join(file_utils.get_project_root(), "resources", "db", "init_database_load.sql")
         self.__execute_sql_file(db_structure_file_path)
         self.__execute_sql_file(db_data_file_path)
 

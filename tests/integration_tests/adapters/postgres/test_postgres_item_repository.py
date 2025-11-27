@@ -3,15 +3,15 @@ from datetime import datetime
 from src.adapters.postgres.postgres_item_repository import PostgresItemRepository
 from src.entities.item import Item
 from tests.integration_tests.adapters.postgres.generic_entity_repository_test import GenericEntityRepositoryTest
-from tests.integration_tests.base_integration_test import BaseIntegrationTest
+from tests.integration_tests.base_sql_alchemy_test import BaseSQLAlchemyTest
 from tests.mocks import item_mock, SECOND_DEFAULT_ID, user_mock
 
 
-class TestPostgresItemRepository(GenericEntityRepositoryTest, BaseIntegrationTest):
+class TestPostgresItemRepository(GenericEntityRepositoryTest, BaseSQLAlchemyTest):
 
     def setUp(self):
         super().setUp()
-        self.repository = PostgresItemRepository(self.db_engine)
+        self.repository = PostgresItemRepository(self.db_instance)
 
     def get_repository(self) -> PostgresItemRepository:
         return self.repository

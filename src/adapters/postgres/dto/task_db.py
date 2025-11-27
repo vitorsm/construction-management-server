@@ -66,13 +66,15 @@ class TaskDB(GenericEntityDB, Base[Task]):
         self.progress = task.progress
 
     def to_entity(self) -> Task:
-        status = enum_utils.instantiate_enum_from_str_name(TaskStatus, self.status)
-
-        task = Task(id=None, name=None, workspace=None, created_at=None, updated_at=None, deleted_at=None,
-                    created_by=None, updated_by=None, planned_start_date=self.planned_start_date,
-                    planned_end_date=self.planned_end_date, actual_start_date=self.actual_start_date,
-                    actual_end_date=self.actual_end_date, status=status, progress=self.progress,
-                    files=[], task_history=[])
+        task = object.__new__(Task)
+        task.planned_start_date = self.planned_start_date
+        task.planned_end_date = self.planned_end_date
+        task.actual_start_date = self.actual_start_date
+        task.actual_end_date = self.actual_end_date
+        task.status = enum_utils.instantiate_enum_from_str_name(TaskStatus, self.status)
+        task.progress = self.progress
+        task.files = []
+        task.task_history = []
 
         self.fill_entity(task)
 

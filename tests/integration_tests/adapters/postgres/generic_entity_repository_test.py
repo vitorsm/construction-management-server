@@ -57,6 +57,7 @@ class GenericEntityRepositoryTest(metaclass=abc.ABCMeta):
     def test_update_entity(self):
         # given
         entity = self.get_changed_entity()
+        entity.deleted_at = None
 
         # when
         self.get_repository().update(entity)

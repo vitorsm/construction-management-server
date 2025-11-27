@@ -11,13 +11,13 @@ from tests.mocks import user_mock, workspace_mock, FIRST_DEFAULT_ID, DEFAULT_CRE
 now = datetime.now()
 
 
-def get_valid_task(tid: UUID = uuid4(), name: str = "Task 1", workspace: Workspace = workspace_mock.get_valid_workspace(),
+def get_valid_task(tid: UUID = None, name: str = "Task 1", workspace: Workspace = workspace_mock.get_valid_workspace(),
                    created_at: datetime = now, updated_at: datetime = now, deleted_at: datetime = None,
                    created_by: User = user_mock.get_valid_user(), updated_by: User = user_mock.get_valid_user(),
                    planned_start_date: datetime = None, planned_end_date: datetime = None, actual_start_date: datetime = None,
                    actual_end_date: datetime = None, status: TaskStatus = TaskStatus.IN_PROGRESS, progress: float = 40,
                    files: List[str] = None, task_history: List[TaskHistory] = None) -> Task:
-
+    tid = tid if tid is not None else uuid4()
     files = files if files is not None else []
     task_history = task_history if task_history is not None else []
 

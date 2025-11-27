@@ -3,6 +3,7 @@ from datetime import datetime
 from typing import List
 from uuid import UUID
 
+from src.entities.exceptions.invalid_entity_exception import InvalidEntityException
 from src.entities.user import User
 
 
@@ -16,6 +17,22 @@ class Workspace:
     updated_by: User
 
     users_ids: List[UUID]
+
+    @staticmethod
+    def obj_id(workspace_id: UUID) -> 'Workspace':
+        workspace = object.__new__(Workspace)
+        workspace.id = workspace_id
+        return workspace
+
+    def __post_init__(self):
+        if not self.name:
+            raise InvalidEntityException("Workspace", ["name"])
+
+    def __eq__(self, other):
+        return self.id == other.id
+
+    def __hash__(self):
+        return hash(self.id)
 
     def user_has_permission(self, user: User) -> bool:
         return self.users_ids and user.id in self.users_ids

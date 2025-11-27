@@ -2,10 +2,11 @@ import abc
 from typing import Generic, TypeVar, get_args, Type, Optional
 from uuid import UUID
 
-from sqlalchemy import Engine, create_engine, and_
+from sqlalchemy import and_
 from sqlalchemy.exc import NoResultFound
 from sqlalchemy.orm import sessionmaker, Session
 
+from src.adapters.postgres.db_instance import DBInstance
 from src.adapters.postgres.dto import Base
 from src.entities.generic_entity import GenericEntity
 from src.service.ports.generic_entity_repository import GenericEntityRepository
@@ -18,11 +19,13 @@ DBModel = TypeVar("DBModel", bound=Base)
 class PostgresGenericRepository(GenericEntityRepository, Generic[Entity, DBModel], metaclass=abc.ABCMeta):
 
     @abc.abstractmethod
-    def get_db_engine(self) -> Engine:
+    def get_db_instance(self) -> DBInstance:
         raise NotImplementedError
 
     def get_session(self) -> Session:
-        return sessionmaker(autocommit=False, autoflush=False, bind=self.get_db_engine())()
+        db_instance = self.get_db_instance()
+        db_engine = db_instance.get_db_engine()
+        return sessionmaker(autocommit=False, autoflush=False, bind=db_engine)()
 
     def create(self, entity: Entity):
         model_db_type = self.__get_db_model_type()
@@ -50,6 +53,10 @@ class PostgresGenericRepository(GenericEntityRepository, Generic[Entity, DBModel
         try:
             entity_db = session.get_one(model_type, entity_id)
         except NoResultFound:
+            return None
+
+        # put it in the query
+        if hasattr(entity_db, "deleted_at") and entity_db.deleted_at is not None:
             return None
 
         return entity_db.to_entity()

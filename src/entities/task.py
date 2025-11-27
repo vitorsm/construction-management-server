@@ -36,8 +36,14 @@ class Task(GenericEntity):
     files: List[str]
     task_history: List[TaskHistory]
 
-    def __post_init__(self):
+    def _get_invalid_fields(self) -> List[str]:
         invalid_fields = []
+
+        if not self.name:
+            invalid_fields.append("name")
+
+        if not self.workspace or not self.workspace.id:
+            invalid_fields.append("workspace")
 
         if self.planned_start_date and self.planned_end_date:
             if self.planned_start_date > self.planned_end_date:
@@ -49,14 +55,13 @@ class Task(GenericEntity):
                 invalid_fields.append("actual_start_date")
                 invalid_fields.append("actual_end_date")
 
-        if self.progress is None or self.progress < 0 or self.progress > 100:
+        if not (isinstance(self.progress, int) or isinstance(self.progress, float)) or self.progress < 0 or self.progress > 100:
             invalid_fields.append("progress")
 
         if not self.status:
             invalid_fields.append("status")
 
-        if invalid_fields:
-            raise InvalidEntityException("Task", invalid_fields)
+        return invalid_fields
 
     def add_task_history(self, task_history: TaskHistory):
         self.progress = task_history.progress

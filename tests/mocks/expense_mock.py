@@ -11,7 +11,7 @@ from tests.mocks import user_mock, workspace_mock, item_mock, FIRST_DEFAULT_ID, 
 now = datetime.now()
 
 
-def get_valid_expense(eid: UUID = uuid4(), name: str = "Expense 1",
+def get_valid_expense(eid: UUID = None, name: str = "Expense 1",
                       workspace: Workspace = workspace_mock.get_valid_workspace(), created_at: datetime = now,
                       updated_at: datetime = now, deleted_at: datetime = None,
                       created_by: User = user_mock.get_valid_user(), updated_by: User = user_mock.get_valid_user(),
@@ -19,6 +19,7 @@ def get_valid_expense(eid: UUID = uuid4(), name: str = "Expense 1",
                       expense_class: ExpenseClass = ExpenseClass.EXECUTION, items: List[Item] = None,
                       value: float = 10, files: List = None, notes: str = None
                       ) -> Expense:
+    eid = eid if eid is not None else eid
     items = items if items is not None else [item_mock.get_valid_item()]
     files = files if files is not None else []
 

@@ -1,15 +1,15 @@
 from uuid import uuid4
 
 from src.adapters.postgres.postgres_workspace_repository import PostgresWorkspaceRepository
-from tests.integration_tests.base_integration_test import BaseIntegrationTest
+from tests.integration_tests.base_sql_alchemy_test import BaseSQLAlchemyTest
 from tests.mocks import FIRST_DEFAULT_ID, workspace_mock
 
 
-class TestPostgresWorkspaceRepository(BaseIntegrationTest):
+class TestPostgresWorkspaceRepository(BaseSQLAlchemyTest):
 
     def setUp(self):
         super().setUp()
-        self.repository = PostgresWorkspaceRepository(self.db_engine)
+        self.repository = PostgresWorkspaceRepository(self.db_instance)
 
     def test_find_workspace_by_id(self):
         # given

@@ -19,7 +19,8 @@ class ItemDB(GenericEntityDB, Base[Item]):
         self.unit_of_measurement = item.unit_of_measurement
 
     def to_entity(self) -> Item:
-        item = Item(id=None, name=None, workspace=None, created_at=None, updated_at=None, deleted_at=None,
-                    created_by=None, updated_by=None, unit_of_measurement=self.unit_of_measurement)
+        item = object.__new__(Item)
+        item.unit_of_measurement = self.unit_of_measurement
+
         self.fill_entity(item)
         return item

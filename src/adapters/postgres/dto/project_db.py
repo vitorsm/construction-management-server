@@ -18,9 +18,8 @@ class ProjectDB(GenericEntityDB, Base[Project]):
         self.budget = project.budget
 
     def to_entity(self) -> Project:
-        project = Project(id=None, name=None, workspace=None, created_at=None,
-                          updated_at=None, deleted_at=None, created_by=None,
-                          updated_by=None, budget=self.budget)
+        project = object.__new__(Project)
+        project.budget = self.budget
 
         self.fill_entity(project)
 
