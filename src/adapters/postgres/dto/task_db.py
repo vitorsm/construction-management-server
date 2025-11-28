@@ -49,6 +49,9 @@ class TaskDB(GenericEntityDB, Base[Task]):
     actual_end_date = Column(DateTime, nullable=True)
     status = Column(String(100), nullable=False)
     progress = Column(Float, nullable=False)
+    project_id = Column(UUID, ForeignKey("project.id"), nullable=True)
+
+    project_db = relationship("ProjectDB", foreign_keys=[project_id], lazy="joined")
     # files: List[str]
     # task_history: List[TaskHistory]
 
@@ -64,6 +67,7 @@ class TaskDB(GenericEntityDB, Base[Task]):
         self.actual_end_date = task.actual_end_date
         self.status = task.status.name
         self.progress = task.progress
+        self.project_id = task.project.id
 
     def to_entity(self) -> Task:
         task = object.__new__(Task)
@@ -75,6 +79,7 @@ class TaskDB(GenericEntityDB, Base[Task]):
         task.progress = self.progress
         task.files = []
         task.task_history = []
+        task.project = self.project_db.to_entity()
 
         self.fill_entity(task)
 

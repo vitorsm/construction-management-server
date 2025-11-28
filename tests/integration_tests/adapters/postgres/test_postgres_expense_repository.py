@@ -42,3 +42,4 @@ class TestPostgresExpenseRepository(GenericEntityRepositoryTest, BaseSQLAlchemyT
         self.assertEqual(entity1.expense_class, entity2.expense_class)
         self.assertEqual(entity1.value, entity2.value)
         self.assertEqual(entity1.notes, entity2.notes)
+        self.assertEqual(entity1.project, entity2.project)

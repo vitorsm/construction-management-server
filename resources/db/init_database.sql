@@ -78,11 +78,13 @@ CREATE TABLE expense (
     expense_class VARCHAR(100) NOT NULL,
     value FLOAT NOT NULL,
     notes TEXT NULL,
+    project_id UUID NOT NULL,
 
     PRIMARY KEY (id),
     FOREIGN KEY (created_by) REFERENCES "user"(id),
     FOREIGN KEY (updated_by) REFERENCES "user"(id),
-    FOREIGN KEY (workspace_id) REFERENCES workspace(id)
+    FOREIGN KEY (workspace_id) REFERENCES workspace(id),
+    FOREIGN KEY (project_id) REFERENCES project(id)
 );
 
 CREATE TABLE expense_has_item (
@@ -109,11 +111,13 @@ CREATE TABLE task (
     actual_end_date TIMESTAMP NULL,
     status VARCHAR(100) NOT NULL,
     progress FLOAT NOT NULL,
+    project_id UUID NOT NULL,
 
     PRIMARY KEY (id),
     FOREIGN KEY (created_by) REFERENCES "user"(id),
     FOREIGN KEY (updated_by) REFERENCES "user"(id),
-    FOREIGN KEY (workspace_id) REFERENCES workspace(id)
+    FOREIGN KEY (workspace_id) REFERENCES workspace(id),
+    FOREIGN KEY (project_id) REFERENCES project(id)
 );
 
 CREATE TABLE task_history (

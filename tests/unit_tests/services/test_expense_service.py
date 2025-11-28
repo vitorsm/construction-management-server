@@ -12,7 +12,8 @@ from src.service.item_service import ItemService
 from src.service.ports.authentication_repository import AuthenticationRepository
 from src.service.ports.expense_repository import ExpenseRepository
 from src.service.ports.workspace_repository import WorkspaceRepository
-from tests.mocks import expense_mock, item_mock
+from src.service.project_service import ProjectService
+from tests.mocks import expense_mock, item_mock, project_mock
 from tests.unit_tests.services.generic_service_test import GenericServiceTest
 
 
@@ -22,9 +23,10 @@ class TestExpenseService(GenericServiceTest, TestCase):
         self.workspace_repository = Mock(spec_set=WorkspaceRepository)
         self.expense_repository = Mock(spec_set=ExpenseRepository)
         self.item_service = Mock(spec_set=ItemService)
+        self.project_service = Mock(spec_set=ProjectService)
 
         self.service = ExpenseService(self.authentication_repository, self.workspace_repository,
-                                      self.expense_repository, self.item_service)
+                                      self.expense_repository, self.item_service, self.project_service)
 
         self.valid_item = item_mock.get_valid_item()
         self.valid_expense = expense_mock.get_valid_expense()
@@ -32,6 +34,7 @@ class TestExpenseService(GenericServiceTest, TestCase):
 
         self.item_service.find_by_id.return_value = self.valid_item
 
+        self.project_service.find_by_id.return_value = project_mock.get_valid_project()
         super().setUp()
 
     def get_service(self) -> GenericService:

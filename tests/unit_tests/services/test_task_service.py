@@ -9,8 +9,9 @@ from src.service.generic_service import GenericService
 from src.service.ports.authentication_repository import AuthenticationRepository
 from src.service.ports.task_repository import TaskRepository
 from src.service.ports.workspace_repository import WorkspaceRepository
+from src.service.project_service import ProjectService
 from src.service.task_service import TaskService
-from tests.mocks import task_mock
+from tests.mocks import task_mock, project_mock
 from tests.unit_tests.services.generic_service_test import GenericServiceTest
 
 
@@ -19,10 +20,13 @@ class TestTaskService(GenericServiceTest, TestCase):
         self.authentication_repository = Mock(spec_set=AuthenticationRepository)
         self.workspace_repository = Mock(spec_set=WorkspaceRepository)
         self.task_repository = Mock(spec_set=TaskRepository)
+        self.project_service = Mock(spec_set=ProjectService)
 
-        self.service = TaskService(self.authentication_repository, self.workspace_repository, self.task_repository)
+        self.service = TaskService(self.authentication_repository, self.workspace_repository, self.task_repository,
+                                   self.project_service)
 
         self.valid_task = task_mock.get_valid_task()
+        self.project_service.find_by_id.return_value = project_mock.get_valid_project()
 
         super().setUp()
 

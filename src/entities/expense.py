@@ -5,7 +5,7 @@ from typing import List, Optional
 from src.entities.exceptions.invalid_entity_exception import InvalidEntityException
 from src.entities.generic_entity import GenericEntity
 from src.entities.item import Item
-
+from src.entities.project import Project
 
 
 class ExpenseType(Enum):
@@ -30,6 +30,7 @@ class Expense(GenericEntity):
     value: float
     files: List[str]
     notes: Optional[str]
+    project: Project
 
     def _get_invalid_fields(self) -> List[str]:
         invalid_fields = []
@@ -38,6 +39,8 @@ class Expense(GenericEntity):
             invalid_fields.append("name")
         if not self.workspace or not self.workspace.id:
             invalid_fields.append("workspace")
+        if not self.project or not self.project.id:
+            invalid_fields.append("project")
         if not self.expense_type:
             invalid_fields.append("expense_type")
         if not self.expense_class:

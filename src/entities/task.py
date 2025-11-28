@@ -6,6 +6,7 @@ from uuid import UUID
 
 from src.entities.exceptions.invalid_entity_exception import InvalidEntityException
 from src.entities.generic_entity import GenericEntity
+from src.entities.project import Project
 from src.entities.user import User
 
 
@@ -35,6 +36,7 @@ class Task(GenericEntity):
     progress: float
     files: List[str]
     task_history: List[TaskHistory]
+    project: Project
 
     def _get_invalid_fields(self) -> List[str]:
         invalid_fields = []
@@ -44,6 +46,9 @@ class Task(GenericEntity):
 
         if not self.workspace or not self.workspace.id:
             invalid_fields.append("workspace")
+
+        if not self.project or not self.project.id:
+            invalid_fields.append("project")
 
         if self.planned_start_date and self.planned_end_date:
             if self.planned_start_date > self.planned_end_date:

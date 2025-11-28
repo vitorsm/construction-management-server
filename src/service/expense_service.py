@@ -8,15 +8,17 @@ from src.service.ports.authentication_repository import AuthenticationRepository
 from src.service.ports.expense_repository import ExpenseRepository
 from src.service.ports.generic_entity_repository import GenericEntityRepository
 from src.service.ports.workspace_repository import WorkspaceRepository
+from src.service.project_service import ProjectService
 
 
 class ExpenseService(GenericService[Expense]):
     def __init__(self, authentication_repository: AuthenticationRepository, workspace_repository: WorkspaceRepository,
-                 expense_repository: ExpenseRepository, item_service: ItemService):
+                 expense_repository: ExpenseRepository, item_service: ItemService, project_service: ProjectService):
         self.__authentication_repository = authentication_repository
         self.__workspace_repository = workspace_repository
         self.__expense_repository = expense_repository
         self.__item_service = item_service
+        self.__project_service = project_service
 
     def get_authentication_repository(self) -> AuthenticationRepository:
         return self.__authentication_repository
@@ -30,6 +32,8 @@ class ExpenseService(GenericService[Expense]):
     def check_entity(self, expense: Expense):
         if not expense.items:
             return
+
+        expense.project = self.__project_service.find_by_id(expense.project.id)
 
         new_items = []
         for item in expense.items:

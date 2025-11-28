@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from typing import Optional, List
+from uuid import UUID
 
 from src.entities.exceptions.invalid_entity_exception import InvalidEntityException
 from src.entities.generic_entity import GenericEntity
@@ -8,6 +9,12 @@ from src.entities.generic_entity import GenericEntity
 @dataclass
 class Project(GenericEntity):
     budget: Optional[float]
+
+    @staticmethod
+    def obj_id(project_id: UUID) -> 'Project':
+        project = object.__new__(Project)
+        project.id = project_id
+        return project
 
     def _get_invalid_fields(self) -> List[str]:
         invalid_fields = []

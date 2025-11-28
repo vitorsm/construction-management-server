@@ -1,4 +1,5 @@
 from typing import List
+from uuid import uuid4
 
 from src.application.api.mappers.task_mapper import TaskMapper
 from tests.integration_tests.application.api.base_api_test import BaseAPITest
@@ -46,6 +47,7 @@ class TestTaskController(GenericControllerTest, BaseAPITest):
         self.assertEqual(entity1["actual_start_date"], entity2["actual_start_date"])
         self.assertEqual(entity1["actual_end_date"], entity2["actual_end_date"])
         self.assertEqual(entity1["status"], entity2["status"])
+        self.assertEqual(entity1["project"]["id"], entity2["project"]["id"])
 
     def get_address(self, entity_id: str = None) -> str:
         return f"/api/tasks/{entity_id}" if entity_id else "/api/tasks"

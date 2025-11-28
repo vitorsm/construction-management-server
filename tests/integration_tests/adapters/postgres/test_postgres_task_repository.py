@@ -46,3 +46,4 @@ class TestPostgresTaskRepository(GenericEntityRepositoryTest, BaseSQLAlchemyTest
         self.assertEqual(entity1.planned_end_date, entity2.planned_end_date)
         self.assertEqual(entity1.actual_start_date, entity2.actual_start_date)
         self.assertEqual(entity1.actual_end_date, entity2.actual_end_date)
+        self.assertEqual(entity1.project, entity2.project)
