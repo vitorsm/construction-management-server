@@ -1,10 +1,11 @@
 from datetime import datetime
+from uuid import uuid4
 
 from src.adapters.postgres.postgres_task_repository import PostgresTaskRepository
 from src.entities.task import Task, TaskStatus
 from tests.integration_tests.adapters.postgres.generic_entity_repository_test import GenericEntityRepositoryTest
 from tests.integration_tests.base_sql_alchemy_test import BaseSQLAlchemyTest
-from tests.mocks import task_mock, SECOND_DEFAULT_ID
+from tests.mocks import task_mock, SECOND_DEFAULT_ID, FIRST_DEFAULT_ID
 
 
 class TestPostgresTaskRepository(GenericEntityRepositoryTest, BaseSQLAlchemyTest):
@@ -47,3 +48,27 @@ class TestPostgresTaskRepository(GenericEntityRepositoryTest, BaseSQLAlchemyTest
         self.assertEqual(entity1.actual_start_date, entity2.actual_start_date)
         self.assertEqual(entity1.actual_end_date, entity2.actual_end_date)
         self.assertEqual(entity1.project, entity2.project)
+
+    def test_find_tasks_by_project(self):
+        # given
+        project_id = FIRST_DEFAULT_ID
+
+        # when
+        tasks = self.repository.find_by_project(project_id)
+
+        # then
+        self.assertEqual(2, len(tasks))
+        self.assertEqual(FIRST_DEFAULT_ID, tasks[0].id)
+        self.assertEqual(SECOND_DEFAULT_ID, tasks[1].id)
+        self.assertEqual("Task 1", tasks[0].name)
+        self.assertEqual("Task 2", tasks[1].name)
+
+    def test_find_tasks_by_project_emtpy(self):
+        # given
+        project_id = uuid4()
+
+        # when
+        tasks = self.repository.find_by_project(project_id)
+
+        # then
+        self.assertEqual(0, len(tasks))

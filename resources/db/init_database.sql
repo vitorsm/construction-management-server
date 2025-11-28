@@ -130,5 +130,5 @@ CREATE TABLE task_history (
 
     PRIMARY KEY (id),
     FOREIGN KEY (task_id) REFERENCES task(id),
-    FOREIGN KEY (created_by) REFERENCES user(id)
+    FOREIGN KEY (created_by) REFERENCES "user"(id)
 );

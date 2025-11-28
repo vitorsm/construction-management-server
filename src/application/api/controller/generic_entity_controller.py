@@ -49,7 +49,7 @@ class GenericEntityController(Generic[EntityService, EntityMapper], metaclass=ab
 
             return jsonify(mapper.to_dto(entity)), 201
 
-        @self.get_controller().route("<path:entity_id>", methods=["PUT"])
+        @self.get_controller().route("<string:entity_id>", methods=["PUT"])
         @jwt_required()
         def update_entity(entity_id: str):
             entity_dto = request.get_json()
@@ -69,9 +69,11 @@ class GenericEntityController(Generic[EntityService, EntityMapper], metaclass=ab
 
             return jsonify(mapper.to_dto(entity))
 
-        @self.get_controller().route("<path:entity_id>")
+        @self.get_controller().route("<string:entity_id>")
         @jwt_required()
         def get_entity(entity_id: str):
+            print("get_entity")
+            print(entity_id)
             uuid_entity_id = uuid_mapper.to_uuid(entity_id)
 
             if not uuid_entity_id:
@@ -84,7 +86,7 @@ class GenericEntityController(Generic[EntityService, EntityMapper], metaclass=ab
 
             return jsonify(mapper.to_dto(project))
 
-        @self.get_controller().route("<path:entity_id>", methods=["DELETE"])
+        @self.get_controller().route("<string:entity_id>", methods=["DELETE"])
         @jwt_required()
         def delete_entity(entity_id: str):
             uuid_entity_id = uuid_mapper.to_uuid(entity_id)
@@ -100,7 +102,7 @@ class GenericEntityController(Generic[EntityService, EntityMapper], metaclass=ab
 
             return '', 204
 
-        @self.get_controller().route("workspace/<path:workspace_id>", methods=["GET"])
+        @self.get_controller().route("workspace/<string:workspace_id>", methods=["GET"])
         @jwt_required()
         def get_all_entities(workspace_id: str):
             uuid_workspace_id = uuid_mapper.to_uuid(workspace_id)

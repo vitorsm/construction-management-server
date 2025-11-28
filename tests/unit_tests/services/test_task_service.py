@@ -26,7 +26,8 @@ class TestTaskService(GenericServiceTest, TestCase):
                                    self.project_service)
 
         self.valid_task = task_mock.get_valid_task()
-        self.project_service.find_by_id.return_value = project_mock.get_valid_project()
+        self.valid_project = project_mock.get_valid_project()
+        self.project_service.find_by_id.return_value = self.valid_project
 
         super().setUp()
 
@@ -90,3 +91,14 @@ class TestTaskService(GenericServiceTest, TestCase):
 
         self.assertIn(str(self.user_without_permission.id), str(ex.exception))
 
+    def test_find_tasks_by_project(self):
+        # given
+        project_id = self.valid_project.id
+        tasks = [task_mock.get_valid_task(), task_mock.get_valid_task()]
+        self.task_repository.find_by_project.return_value = tasks
+
+        # when
+        returned_tasks = self.service.find_tasks_by_project(project_id)
+
+        # then
+        self.assertEqual(tasks, returned_tasks)

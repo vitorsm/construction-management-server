@@ -1,9 +1,13 @@
+from typing import List
+from uuid import UUID
+
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import and_
 
 from src.adapters.postgres.db_instance import DBInstance
 from src.adapters.postgres.dto.task_db import TaskDB
 from src.adapters.postgres.postgres_generic_repository import PostgresGenericRepository
-from src.entities.task import Task
+from src.entities.task import Task, TaskHistory
 from src.service.ports.task_repository import TaskRepository
 
 
@@ -14,3 +18,11 @@ class PostgresTaskRepository(PostgresGenericRepository[Task, TaskDB], TaskReposi
 
     def get_db_instance(self) -> DBInstance:
         return self.__db_instance
+
+    def create_task_history_and_update_task(self, task: Task, task_history: TaskHistory):
+        pass
+
+    def find_by_project(self, project_id: UUID) -> List[Task]:
+        session = self.get_session()
+        tasks_db = session.query(TaskDB).filter(and_(TaskDB.project_id == project_id, TaskDB.deleted_at == None)).all()
+        return [task_db.to_entity() for task_db in tasks_db]
