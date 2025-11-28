@@ -1,3 +1,4 @@
+from datetime import datetime
 from multiprocessing.forkserver import set_forkserver_preload
 from typing import List
 from uuid import UUID
@@ -34,6 +35,10 @@ class TaskService(GenericService[Task]):
     def create_task_history(self, task_id: UUID, task_history: TaskHistory):
         task = self.find_by_id(task_id)
         task.add_task_history(task_history)
+
+        user = self.__authentication_repository.get_current_user()
+        task_history.set_creating_fields(user)
+
         self.__task_repository.create_task_history_and_update_task(task, task_history)
 
     def find_tasks_by_project(self, project_id: UUID) -> List[Task]:

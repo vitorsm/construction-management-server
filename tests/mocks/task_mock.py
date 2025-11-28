@@ -30,11 +30,12 @@ def get_valid_task(tid: UUID = None, name: str = "Task 1", workspace: Workspace 
 
 
 def get_task_history(hid: UUID = uuid4(), created_at: datetime = now, progress: float = 15, files: List[str] = None,
-                     created_by: User = user_mock.get_valid_user(), notes: str = None) -> TaskHistory:
+                     created_by: User = user_mock.get_valid_user(), notes: str = None,
+                     status = TaskStatus.IN_PROGRESS) -> TaskHistory:
     files = files if files is not None else []
 
     return TaskHistory(id=hid, created_at=created_at, progress=progress,
-                       files=files, created_by=created_by, notes=notes)
+                       files=files, created_by=created_by, notes=notes, status=status)
 
 
 def get_default_task() -> Task:

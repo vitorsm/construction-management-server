@@ -21,6 +21,12 @@ app.config['SECRET_KEY'] = config.API_TOKEN_SECRET
 app.config['JWT_AUTH_URL_RULE'] = "/api/auth/authenticate"
 app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(hours=config.API_TOKEN_EXPIRATION_HOURS)
 app.config['JWT_AUTH_HEADER_PREFIX'] = "Bearer"
+app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
+    "pool_size": 10,          # number of connections to keep open
+    "max_overflow": 20,       # allowed overflow connections
+    "pool_timeout": 30,       # seconds to wait before giving up
+    "pool_recycle": 300,     # refresh connections every 30 min
+}
 
 CORS(app)
 

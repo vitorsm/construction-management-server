@@ -1,11 +1,12 @@
 from datetime import datetime
 from uuid import uuid4
 
+from src.adapters.postgres.dto.task_db import TaskHistoryDB
 from src.adapters.postgres.postgres_task_repository import PostgresTaskRepository
-from src.entities.task import Task, TaskStatus
+from src.entities.task import Task, TaskStatus, TaskHistory
 from tests.integration_tests.adapters.postgres.generic_entity_repository_test import GenericEntityRepositoryTest
 from tests.integration_tests.base_sql_alchemy_test import BaseSQLAlchemyTest
-from tests.mocks import task_mock, SECOND_DEFAULT_ID, FIRST_DEFAULT_ID
+from tests.mocks import task_mock, SECOND_DEFAULT_ID, FIRST_DEFAULT_ID, user_mock
 
 
 class TestPostgresTaskRepository(GenericEntityRepositoryTest, BaseSQLAlchemyTest):
@@ -72,3 +73,21 @@ class TestPostgresTaskRepository(GenericEntityRepositoryTest, BaseSQLAlchemyTest
 
         # then
         self.assertEqual(0, len(tasks))
+
+    def test_create_task_history(self):
+        # given
+        task_history = task_mock.get_task_history(notes="text")
+        task_history.created_by = user_mock.get_default_user()
+        task = task_mock.get_default_task()
+
+        # when
+        self.repository.create_task_history_and_update_task(task, task_history)
+
+        # then
+        persisted_entity = self._get_session().get_one(TaskHistoryDB, task_history.id)
+
+        self.assertIsNotNone(persisted_entity)
+        self.assertEqual(task_history.notes, persisted_entity.notes)
+        self.assertEqual(task_history.progress, persisted_entity.progress)
+        self.assertEqual(task_history.status.name, persisted_entity.status)
+        self.assertEqual(task_history.notes, persisted_entity.notes)

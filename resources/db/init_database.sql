@@ -127,6 +127,7 @@ CREATE TABLE task_history (
     created_by UUID NOT NULL,
     progress FLOAT NOT NULL,
     notes TEXT NULL,
+    status VARCHAR(100) NOT NULL,
 
     PRIMARY KEY (id),
     FOREIGN KEY (task_id) REFERENCES task(id),

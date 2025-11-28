@@ -72,8 +72,6 @@ class GenericEntityController(Generic[EntityService, EntityMapper], metaclass=ab
         @self.get_controller().route("<string:entity_id>")
         @jwt_required()
         def get_entity(entity_id: str):
-            print("get_entity")
-            print(entity_id)
             uuid_entity_id = uuid_mapper.to_uuid(entity_id)
 
             if not uuid_entity_id:

@@ -18,6 +18,7 @@ class TaskHistoryDB(Base[TaskHistory]):
     task_id = Column(UUID, ForeignKey("task.id"), nullable=False)
     created_by = Column(UUID, ForeignKey("user.id"), nullable=False)
     notes = Column(String, nullable=True)
+    status = Column(String, nullable=False)
 
     created_by_db = relationship("UserDB", foreign_keys=[created_by], lazy="joined")
     # files: List[str]
@@ -32,12 +33,14 @@ class TaskHistoryDB(Base[TaskHistory]):
         self.progress = task_history.progress
         self.created_by = task_history.created_by.id
         self.notes = task_history.notes
+        self.status = task_history.status.name
 
     def to_entity(self) -> TaskHistory:
         created_by = self.created_by_db.to_entity()
+        status = enum_utils.instantiate_enum_from_str_name(TaskStatus, self.status)
 
         return TaskHistory(id=self.id, created_at=self.created_at, progress=self.progress,
-                           files=[], created_by=created_by, notes=self.notes)
+                           files=[], created_by=created_by, notes=self.notes, status=status)
 
 
 

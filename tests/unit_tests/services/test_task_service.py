@@ -66,6 +66,9 @@ class TestTaskService(GenericServiceTest, TestCase):
         # then
         self.task_repository.create_task_history_and_update_task(self.valid_task, task_history)
         self.assertEqual(task_history.progress, self.valid_task.progress)
+        self.assertIsNotNone(task_history.id)
+        self.assertEqual(self.current_user, task_history.created_by)
+        self.assertIsNotNone(task_history.created_at)
 
     def test_create_task_history_without_task(self):
         # given

@@ -1,10 +1,12 @@
 from typing import List
 from uuid import uuid4
 
+from src.application.api.mappers.task_history_mapper import TaskHistoryMapper
 from src.application.api.mappers.task_mapper import TaskMapper
+from src.entities.task import TaskStatus
 from tests.integration_tests.application.api.base_api_test import BaseAPITest
 from tests.integration_tests.application.api.controller.generic_controller_test import GenericControllerTest
-from tests.mocks import task_mock
+from tests.mocks import task_mock, FIRST_DEFAULT_ID, user_mock, SECOND_DEFAULT_ID
 
 
 class TestTaskController(GenericControllerTest, BaseAPITest):
@@ -51,3 +53,56 @@ class TestTaskController(GenericControllerTest, BaseAPITest):
 
     def get_address(self, entity_id: str = None) -> str:
         return f"/api/tasks/{entity_id}" if entity_id else "/api/tasks"
+
+    def test_create_task_history(self):
+        # given
+        task_id = str(FIRST_DEFAULT_ID)
+        address = self.get_address(task_id) + "/history"
+        task_history = task_mock.get_task_history()
+        task_history.status = TaskStatus.DONE
+        task_history.created_by = user_mock.get_default_user()
+        dto = TaskHistoryMapper.to_dto(task_history)
+
+        # when
+        response = self.client.post(address, json=dto, headers=self.get_default_headers())
+
+        # then
+        response_data = response.json
+        self.assertEqual(201, response.status_code, response.text)
+        self.assertEqual(dto["status"], response_data["status"])
+        self.assertEqual(dto["progress"], response_data["progress"])
+        self.assertEqual(str(FIRST_DEFAULT_ID), response_data["created_by"]["id"])
+
+        response = self.client.get(self.get_address(task_id), headers=self.get_default_headers())
+        self.assertEqual(task_history.status.name, response.json["status"])
+
+    def test_create_task_history_without_permission(self):
+        # given
+        task_id = str(FIRST_DEFAULT_ID)
+        address = self.get_address(task_id) + "/history"
+        task_history = task_mock.get_task_history()
+        task_history.created_by = user_mock.get_default_user()
+        dto = TaskHistoryMapper.to_dto(task_history)
+
+        # when
+        response = self.client.post(address, json=dto, headers=self.get_default_headers(with_permission=False))
+
+        # then
+        response_data = response.json
+        self.assertEqual(403, response.status_code, response.text)
+        self.assertIn(str(SECOND_DEFAULT_ID), response_data["details"])
+
+    def test_create_task_history_not_found(self):
+        # given
+        task_id = str(uuid4())
+        address = self.get_address(task_id) + "/history"
+        task_history = task_mock.get_task_history()
+        task_history.created_by = user_mock.get_default_user()
+        dto = TaskHistoryMapper.to_dto(task_history)
+
+        # when
+        response = self.client.post(address, json=dto, headers=self.get_default_headers(with_permission=False))
+
+        # then
+        response_data = response.json
+        self.assertEqual(404, response.status_code, response.text)

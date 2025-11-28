@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from enum import Enum
 from typing import List, Optional
-from uuid import UUID
+from uuid import UUID, uuid4
 
 from src.entities.exceptions.invalid_entity_exception import InvalidEntityException
 from src.entities.generic_entity import GenericEntity
@@ -22,8 +22,22 @@ class TaskHistory:
     created_at: datetime
     created_by: User
     progress: float
+    status: TaskStatus
     files: List[str]
     notes: Optional[str]
+
+    def __post_init__(self):
+        invalid_fields = []
+        if not self.status:
+            invalid_fields.append("status")
+
+        if invalid_fields:
+            raise InvalidEntityException("TaskHistory", invalid_fields)
+
+    def set_creating_fields(self, user: User):
+        self.id = uuid4()
+        self.created_by = user
+        self.created_at = datetime.now()
 
 
 @dataclass
@@ -71,3 +85,4 @@ class Task(GenericEntity):
     def add_task_history(self, task_history: TaskHistory):
         self.progress = task_history.progress
         self.task_history.append(task_history)
+        self.status = task_history.status
