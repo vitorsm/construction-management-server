@@ -1,8 +1,10 @@
+from uuid import uuid4
+
 from src.adapters.postgres.postgres_expense_repository import PostgresExpenseRepository
 from src.entities.expense import Expense, ExpenseType, ExpenseClass
 from tests.integration_tests.adapters.postgres.generic_entity_repository_test import GenericEntityRepositoryTest
 from tests.integration_tests.base_sql_alchemy_test import BaseSQLAlchemyTest
-from tests.mocks import expense_mock, SECOND_DEFAULT_ID
+from tests.mocks import expense_mock, SECOND_DEFAULT_ID, FIRST_DEFAULT_ID
 
 
 class TestPostgresExpenseRepository(GenericEntityRepositoryTest, BaseSQLAlchemyTest):
@@ -43,3 +45,27 @@ class TestPostgresExpenseRepository(GenericEntityRepositoryTest, BaseSQLAlchemyT
         self.assertEqual(entity1.value, entity2.value)
         self.assertEqual(entity1.notes, entity2.notes)
         self.assertEqual(entity1.project, entity2.project)
+
+    def test_find_expenses_by_project(self):
+        # given
+        project_id = FIRST_DEFAULT_ID
+
+        # when
+        expenses = self.repository.find_by_project(project_id)
+
+        # then
+        self.assertEqual(2, len(expenses))
+        self.assertEqual(FIRST_DEFAULT_ID, expenses[0].id)
+        self.assertEqual(SECOND_DEFAULT_ID, expenses[1].id)
+        self.assertEqual("Expense 1", expenses[0].name)
+        self.assertEqual("Expense 2", expenses[1].name)
+
+    def test_find_expenses_by_project_emtpy(self):
+        # given
+        project_id = uuid4()
+
+        # when
+        expenses = self.repository.find_by_project(project_id)
+
+        # then
+        self.assertEqual(0, len(expenses))

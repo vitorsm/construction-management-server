@@ -1,3 +1,5 @@
+import io
+
 from src.adapters.postgres.postgres_file_document_repository import PostgresFileDocumentRepository
 from src.adapters.postgres.postgres_generic_repository import PostgresGenericRepository
 from src.entities.file_document import FileDocument
@@ -17,7 +19,9 @@ class TestPostgresFileDocumentRepository(GenericEntityRepositoryTest, BaseSQLAlc
         return self.repository
 
     def get_first_entity(self) -> GenericEntity:
-        return file_document_mock.get_default_file_document()
+        document = file_document_mock.get_default_file_document()
+        document.file = b"file content"
+        return document
 
     def get_second_entity(self) -> GenericEntity:
         document = self.get_first_entity()

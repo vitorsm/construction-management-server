@@ -26,7 +26,7 @@ class FileDocumentMapper(GenericMapper[FileDocument]):
 
         return FileDocument(id=fid, name=dto.get("name"), created_at=created_at, updated_at=updated_at,
                             deleted_at=deleted_at, created_by=created_by, updated_by=updated_by, file_type=file_type,
-                            workspace=workspace)
+                            workspace=workspace, file=None)
 
     @staticmethod
     def to_dto(file_document: Optional[FileDocument]) -> Optional[dict]:

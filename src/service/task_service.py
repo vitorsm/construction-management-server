@@ -42,6 +42,12 @@ class TaskService(GenericService[Task]):
         self.__task_repository.create_task_history_and_update_task(task, task_history)
 
     def find_tasks_by_project(self, project_id: UUID) -> List[Task]:
-        # get project to ensure it exists
+        # get project to ensure permission and it exists
         project = self.__project_service.find_by_id(project_id)
         return self.__task_repository.find_by_project(project.id)
+
+    def find_task_history_by_project(self, project_id: UUID) -> List[TaskHistory]:
+        # get project to ensure permission and it exists
+        project = self.__project_service.find_by_id(project_id)
+        return self.__task_repository.find_task_histories_by_project(project.id)
+

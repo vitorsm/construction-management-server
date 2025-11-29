@@ -1,16 +1,34 @@
+import uuid
 from datetime import datetime
 
 from sqlalchemy import Column, DateTime, String, Float, ForeignKey, UUID
 from sqlalchemy.orm import relationship
 
-from src.adapters.postgres.dto import Base
+from src.adapters.postgres.dto import Base, Entity
 from src.adapters.postgres.dto.generic_entity_db import GenericEntityDB
 from src.entities.task import Task, TaskStatus, TaskHistory
 from src.utils import enum_utils
 
 
-class TaskHistoryDB(Base[TaskHistory]):
+class TaskHistoryFileDB(Base):
+    __tablename__ = "task_history_has_file"
+    task_history_id = Column(UUID, ForeignKey("task_history.id"), primary_key=True)
+    file_document_id = Column(UUID, ForeignKey("file_document.id"), primary_key=True)
 
+    file_document_db = relationship("FileDocumentDB", foreign_keys=[file_document_id], lazy="joined")
+
+    def __init__(self, task_history_id: uuid.UUID, file_document_id: uuid.UUID):
+        self.task_history_id = task_history_id
+        self.file_document_id = file_document_id
+
+    def to_entity(self) -> Entity:
+        pass
+
+    def update_attributes(self, entity: Entity):
+        pass
+
+
+class TaskHistoryDB(Base[TaskHistory]):
     __tablename__ = "task_history"
     id = Column(UUID, primary_key=True)
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
@@ -21,7 +39,11 @@ class TaskHistoryDB(Base[TaskHistory]):
     status = Column(String, nullable=False)
 
     created_by_db = relationship("UserDB", foreign_keys=[created_by], lazy="joined")
-    # files: List[str]
+
+    files = relationship("TaskHistoryFileDB", lazy="select",
+                         primaryjoin="TaskHistoryDB.id == TaskHistoryFileDB.task_history_id")
+
+    task_db = relationship("TaskDB", foreign_keys=[task_id], lazy="joined")
 
     def __init__(self, task_history: TaskHistory, task: Task):
         self.update_attributes(task_history)
@@ -34,14 +56,17 @@ class TaskHistoryDB(Base[TaskHistory]):
         self.created_by = task_history.created_by.id
         self.notes = task_history.notes
         self.status = task_history.status.name
+        self.files = [TaskHistoryFileDB(task_history.id, file_id) for file_id in task_history.files]
 
-    def to_entity(self) -> TaskHistory:
+    def to_entity(self, fill_task: bool = False) -> TaskHistory:
         created_by = self.created_by_db.to_entity()
         status = enum_utils.instantiate_enum_from_str_name(TaskStatus, self.status)
+        files = [file_document.file_document_id for file_document in self.files]
+        task = self.task_db.to_entity() if fill_task else None
 
         return TaskHistory(id=self.id, created_at=self.created_at, progress=self.progress,
-                           files=[], created_by=created_by, notes=self.notes, status=status)
-
+                           files=files, created_by=created_by, notes=self.notes, status=status,
+                           task=task)
 
 
 class TaskDB(GenericEntityDB, Base[Task]):

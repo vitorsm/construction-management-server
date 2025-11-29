@@ -13,6 +13,9 @@ class FileType(Enum):
 class FileDocument(GenericEntity):
     file_type: FileType
 
+    # transient
+    file: bytes
+
     def _get_invalid_fields(self) -> List[str]:
         invalid_fields = []
 

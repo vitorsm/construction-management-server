@@ -61,3 +61,7 @@ class BaseAPITest(TestCase, BaseDBIntegrationTest):
 
     def tearDown(self):
         super().clear_database()
+
+    def get_default_headers(self, with_permission: bool = True, with_token: bool = True) -> dict:
+        token = self.token if with_permission else self.token_without_permission
+        return {"Authorization": token if with_token else None}

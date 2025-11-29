@@ -69,7 +69,7 @@ class GenericService(Generic[Entity], metaclass=abc.ABCMeta):
         if not entity:
             raise EntityNotFoundException(self.__get_entity_type_name(), str(entity_id))
 
-        self.__check_permission(entity, self.get_authentication_repository().get_current_user(), {})
+        self._check_permission(entity, self.get_authentication_repository().get_current_user(), {})
 
         return entity
 
@@ -79,11 +79,11 @@ class GenericService(Generic[Entity], metaclass=abc.ABCMeta):
 
     def __write_entity_check(self, entity: Entity):
         current_user = self.get_authentication_repository().get_current_user()
-        self.__check_permission(entity, current_user, {})
+        self._check_permission(entity, current_user, {})
         self.check_entity(entity)
         entity.update_audit_fields(current_user)
 
-    def __check_permission(self, entity: Entity, user: User, workspace_by_ids: Dict[UUID, Workspace]):
+    def _check_permission(self, entity: Entity, user: User, workspace_by_ids: Dict[UUID, Workspace]):
         if not entity.workspace or not entity.workspace.id:
             raise InvalidEntityException(self.__get_entity_type_name(), ["workspace"])
 

@@ -1,3 +1,6 @@
+from typing import List
+from uuid import UUID
+
 from src.entities.exceptions.entity_not_found_exception import EntityNotFoundException
 from src.entities.exceptions.invalid_entity_exception import InvalidEntityException
 from src.entities.exceptions.permission_exception import PermissionException
@@ -47,3 +50,8 @@ class ExpenseService(GenericService[Expense]):
             new_items.append(persisted_item)
 
         expense.items = new_items
+
+    def find_expenses_by_project(self, project_id: UUID) -> List[Expense]:
+        # get project to ensure permission and it exists
+        project = self.__project_service.find_by_id(project_id)
+        return self.__expense_repository.find_by_project(project.id)

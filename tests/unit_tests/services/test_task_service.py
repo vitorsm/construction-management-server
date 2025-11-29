@@ -105,3 +105,9 @@ class TestTaskService(GenericServiceTest, TestCase):
 
         # then
         self.assertEqual(tasks, returned_tasks)
+
+    def test_find_task_history_by_project(self):
+        # given
+        project_id = self.valid_project.id
+        task_histories = [task_mock.get_task_history()]
+        self.task_repository.find_task_histories_by_project(project_id)

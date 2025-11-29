@@ -87,3 +87,90 @@ class TestProjectController(GenericControllerTest, BaseAPITest):
 
         # then
         self.assertEqual(403, response.status_code, response.text)
+
+    def test_get_feed_items(self):
+        # given
+        project_id = str(FIRST_DEFAULT_ID)
+        address = self.get_address(project_id) + "/feed"
+
+        # when
+        response = self.client.get(address, headers=self.get_default_headers())
+
+        # then
+        feed_items = response.json
+        self.assertEqual(200, response.status_code, response.text)
+        self.assertEqual(2, len(feed_items))
+        self.assertEqual("Started working on the task", feed_items[0]["notes"])
+        self.assertEqual(10, feed_items[0]["progress"])
+        self.assertEqual("IN_PROGRESS", feed_items[0]["status"])
+        self.assertEqual(str(FIRST_DEFAULT_ID), feed_items[0]["created_by"]["id"])
+        self.assertEqual("User 1", feed_items[0]["created_by"]["name"])
+        self.assertEqual("user1", feed_items[0]["created_by"]["login"])
+        self.assertIsNone(feed_items[0]["created_by"]["password"])
+        self.assertEqual("Task 1", feed_items[0]["source"]["name"])
+        self.assertEqual("2025-11-02T10:31:00", feed_items[0]["source"]["planned_start_date"])
+        self.assertEqual("2025-11-03T10:31:00", feed_items[0]["source"]["planned_end_date"])
+        self.assertEqual("2025-11-04T10:31:00", feed_items[0]["source"]["actual_start_date"])
+        self.assertEqual("2025-11-05T10:31:00", feed_items[0]["source"]["actual_end_date"])
+
+    def test_get_feed_items_not_found_project(self):
+        # given
+        project_id = str(uuid4())
+        address = self.get_address(project_id) + "/feed"
+
+        # when
+        response = self.client.get(address, headers=self.get_default_headers())
+
+        # then
+        self.assertEqual(404, response.status_code)
+
+    def test_get_feed_items_without_permission(self):
+        # given
+        project_id = str(FIRST_DEFAULT_ID)
+        address = self.get_address(project_id) + "/feed"
+
+        # when
+        response = self.client.get(address, headers=self.get_default_headers(with_permission=False))
+
+        # then
+        self.assertEqual(403, response.status_code)
+
+    def test_get_expenses_by_project(self):
+        # given
+        project_id = str(FIRST_DEFAULT_ID)
+        address = self.get_address(project_id) + "/expenses"
+
+        # when
+        response = self.client.get(address, headers=self.get_default_headers())
+
+        # then
+        expense_response = response.json
+        self.assertEqual(200, response.status_code, response.text)
+        self.assertEqual(2, len(expense_response))
+        self.assertEqual(str(FIRST_DEFAULT_ID), expense_response[0]["id"])
+        self.assertEqual(str(SECOND_DEFAULT_ID), expense_response[1]["id"])
+        self.assertEqual("Expense 1", expense_response[0]["name"])
+        self.assertEqual("Expense 2", expense_response[1]["name"])
+
+    def test_get_expenses_by_project_not_found(self):
+        # given
+        project_id = str(uuid4())
+        address = self.get_address(project_id) + "/expenses"
+
+        # when
+        response = self.client.get(address, headers=self.get_default_headers())
+
+        # then
+        self.assertEqual(404, response.status_code, response.text)
+
+    def test_get_expenses_by_project_without_permission(self):
+        # given
+        project_id = str(FIRST_DEFAULT_ID)
+        address = self.get_address(project_id) + "/expenses"
+
+        # when
+        response = self.client.get(address, headers=self.get_default_headers(with_permission=False))
+
+        # then
+        self.assertEqual(403, response.status_code, response.text)
+

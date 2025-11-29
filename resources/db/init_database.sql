@@ -150,3 +150,12 @@ CREATE TABLE file_document (
     FOREIGN KEY (updated_by) REFERENCES "user"(id),
     FOREIGN KEY (workspace_id) REFERENCES workspace(id)
 );
+
+CREATE TABLE task_history_has_file (
+    task_history_id UUID NOT NULL,
+    file_document_id UUID NOT NULL,
+
+    PRIMARY KEY (task_history_id, file_document_id),
+    FOREIGN KEY (task_history_id) REFERENCES task_history(id),
+    FOREIGN KEY (file_document_id) REFERENCES file_document(id)
+);

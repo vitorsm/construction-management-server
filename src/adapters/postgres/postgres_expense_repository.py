@@ -1,6 +1,9 @@
 import abc
+from typing import List
+from uuid import UUID
 
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import and_
 
 from src.adapters.postgres.db_instance import DBInstance
 from src.adapters.postgres.dto.expense_db import ExpenseDB
@@ -16,3 +19,9 @@ class PostgresExpenseRepository(PostgresGenericRepository[Expense, ExpenseDB], E
 
     def get_db_instance(self) -> DBInstance:
         return self.__db_instance
+
+    def find_by_project(self, project_id: UUID) -> List[Expense]:
+        session = self.get_session()
+        expenses_db = session.query(ExpenseDB).filter(
+            and_(ExpenseDB.project_id == project_id, ExpenseDB.deleted_at == None)).all()
+        return [expense_db.to_entity() for expense_db in expenses_db]

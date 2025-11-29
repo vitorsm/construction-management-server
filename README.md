@@ -49,3 +49,6 @@ If you prefer, generate the html page for more details:
 ```
 coverage html
 ```
+
+## TODO
+1. Show task history even if the task is deleted

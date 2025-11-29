@@ -15,3 +15,7 @@ class TaskRepository(GenericEntityRepository, metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def find_by_project(self, project_id: UUID) -> List[Task]:
         raise NotImplementedError
+
+    @abc.abstractmethod
+    def find_task_histories_by_project(self, project_id: UUID) -> List[TaskHistory]:
+        raise NotImplementedError

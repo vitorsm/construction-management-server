@@ -18,7 +18,8 @@ def get_valid_file_document(fid: UUID = None, name: str = "file",
     fid = fid if fid else uuid4()
 
     return FileDocument(id=fid, name=name, workspace=workspace, created_at=created_at, updated_at=updated_at,
-                        deleted_at=deleted_at, created_by=created_by, updated_by=updated_by, file_type=file_type)
+                        deleted_at=deleted_at, created_by=created_by, updated_by=updated_by, file_type=file_type,
+                        file=None)
 
 
 def get_default_file_document() -> FileDocument:

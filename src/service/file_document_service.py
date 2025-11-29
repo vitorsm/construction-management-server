@@ -1,3 +1,8 @@
+from typing import Optional
+from uuid import UUID
+
+from src.entities.exceptions.entity_not_found_exception import EntityNotFoundException
+from src.entities.file_document import FileDocument
 from src.service.generic_service import GenericService, Entity
 from src.service.ports.authentication_repository import AuthenticationRepository
 from src.service.ports.file_document_repository import FileDocumentRepository
@@ -24,3 +29,13 @@ class FileDocumentService(GenericService):
 
     def check_entity(self, entity: Entity):
         pass
+
+    def find_by_id(self, file_document_id: UUID, fill_file: bool = False) -> Optional[FileDocument]:
+        entity = self.__file_document_repository.find_by_id(file_document_id, fill_file=fill_file)
+
+        if not entity:
+            raise EntityNotFoundException(self.__get_entity_type_name(), str(file_document_id))
+
+        self._check_permission(entity, self.get_authentication_repository().get_current_user(), {})
+
+        return entity

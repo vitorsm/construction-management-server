@@ -78,6 +78,7 @@ class TestPostgresTaskRepository(GenericEntityRepositoryTest, BaseSQLAlchemyTest
         # given
         task_history = task_mock.get_task_history(notes="text")
         task_history.created_by = user_mock.get_default_user()
+        task_history.files = [FIRST_DEFAULT_ID]
         task = task_mock.get_default_task()
 
         # when
@@ -91,3 +92,24 @@ class TestPostgresTaskRepository(GenericEntityRepositoryTest, BaseSQLAlchemyTest
         self.assertEqual(task_history.progress, persisted_entity.progress)
         self.assertEqual(task_history.status.name, persisted_entity.status)
         self.assertEqual(task_history.notes, persisted_entity.notes)
+        self.assertEqual(task_history.files[0], persisted_entity.files[0].file_document_id)
+
+    def test_find_task_histories_by_project(self):
+        # given
+        project_id = FIRST_DEFAULT_ID
+
+        # when
+        task_histories = self.repository.find_task_histories_by_project(project_id)
+
+        # then
+        self.assertEqual(2, len(task_histories))
+
+    def test_find_task_histories_by_project_empty(self):
+        # given
+        project_id = uuid4()
+
+        # when
+        task_histories = self.repository.find_task_histories_by_project(project_id)
+
+        # then
+        self.assertEqual(0, len(task_histories))

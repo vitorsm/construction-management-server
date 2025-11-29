@@ -23,8 +23,12 @@ class TaskHistory:
     created_by: User
     progress: float
     status: TaskStatus
-    files: List[str]
+    files: List[UUID]
     notes: Optional[str]
+
+    # transient
+    task: Optional['Task'] = None
+
 
     def __post_init__(self):
         invalid_fields = []

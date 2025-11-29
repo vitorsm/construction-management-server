@@ -28,6 +28,7 @@ class TaskController(GenericEntityController[TaskService, TaskMapper]):
         def create_task_history(task_id: str):
             task_uuid = uuid_mapper.to_uuid(task_id)
             dto = request.get_json()
+            print(dto)
             task_history = TaskHistoryMapper.to_entity(dto)
 
             task_service = self.app_injector.get(TaskService)

@@ -31,10 +31,11 @@ class TestExpenseService(GenericServiceTest, TestCase):
         self.valid_item = item_mock.get_valid_item()
         self.valid_expense = expense_mock.get_valid_expense()
         self.valid_expense.items = [self.valid_item]
+        self.valid_project = project_mock.get_valid_project()
 
         self.item_service.find_by_id.return_value = self.valid_item
 
-        self.project_service.find_by_id.return_value = project_mock.get_valid_project()
+        self.project_service.find_by_id.return_value = self.valid_project
         super().setUp()
 
     def get_service(self) -> GenericService:
@@ -105,3 +106,15 @@ class TestExpenseService(GenericServiceTest, TestCase):
             self.get_service().update(entity)
 
         self.assertIn("items", str(ex.exception))
+
+    def test_find_expenses_by_project(self):
+        # given
+        project_id = self.valid_project.id
+        expenses = [expense_mock.get_valid_expense(), expense_mock.get_valid_expense()]
+        self.expense_repository.find_by_project.return_value = expenses
+
+        # when
+        returned_expenses = self.service.find_expenses_by_project(project_id)
+
+        # then
+        self.assertEqual(expenses, returned_expenses)

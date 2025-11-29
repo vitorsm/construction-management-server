@@ -4,8 +4,11 @@ from injector import Injector
 
 from src.application.api.controller.generic_entity_controller import GenericEntityController
 from src.application.api.mappers import uuid_mapper
+from src.application.api.mappers.expense_mapper import ExpenseMapper
+from src.application.api.mappers.feed_item_mapper import FeedItemMapper
 from src.application.api.mappers.project_mapper import ProjectMapper
 from src.application.api.mappers.task_mapper import TaskMapper
+from src.service.expense_service import ExpenseService
 from src.service.project_service import ProjectService
 from src.service.task_service import TaskService
 
@@ -35,6 +38,29 @@ class ProjectController(GenericEntityController[ProjectService, ProjectMapper]):
             tasks_dto = [TaskMapper.to_dto(task) for task in tasks]
 
             return jsonify(tasks_dto)
+
+        @self.get_controller().route("/<string:project_id>/expenses")
+        @jwt_required()
+        def get_expenses_by_project(project_id: str):
+            uuid_project_id = uuid_mapper.to_uuid(project_id)
+
+            expense_service = self.app_injector.get(ExpenseService)
+            expenses = expense_service.find_expenses_by_project(uuid_project_id)
+            expenses_dto = [ExpenseMapper.to_dto(expense) for expense in expenses]
+
+            return jsonify(expenses_dto)
+
+        @self.get_controller().route("/<string:project_id>/feed")
+        @jwt_required()
+        def get_feed_items(project_id: str):
+            uuid_project_id = uuid_mapper.to_uuid(project_id)
+
+            task_service = self.app_injector.get(TaskService)
+            task_histories = task_service.find_task_history_by_project(uuid_project_id)
+            feed_items = [FeedItemMapper.task_history_to_feed_item(task_history) for task_history in task_histories]
+
+            return jsonify(feed_items)
+
 
     def validate_input(self, data: dict):
         pass

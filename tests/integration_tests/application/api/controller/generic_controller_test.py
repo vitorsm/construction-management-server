@@ -55,10 +55,6 @@ class GenericControllerTest(metaclass=abc.ABCMeta):
         if "workspace" in dto:
             dto["workspace"] = {"id": dto["workspace"]["id"]}
 
-    def get_default_headers(self, with_permission: bool = True, with_token: bool = True) -> dict:
-        token = self.token if with_permission else self.token_without_permission
-        return {"Authorization": token if with_token else None}
-
     def test_create_entity(self):
         # given
         address = self.get_address()
