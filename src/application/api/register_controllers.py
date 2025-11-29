@@ -6,6 +6,7 @@ from injector import Injector
 
 from src.application.api import AuthenticationController, ProjectController, ItemController
 from src.application.api.controller.expense_controller import ExpenseController
+from src.application.api.controller.file_document_controller import FileDocumentController
 from src.application.api.controller.task_controller import TaskController
 from src.application.api.errors import exception_handler
 
@@ -28,6 +29,9 @@ def instantiate_controllers(app: Flask, app_injector: Injector):
 
     expense_controller = ExpenseController(app_injector)
     controllers.append(expense_controller.controller)
+
+    file_document_controller = FileDocumentController(app_injector)
+    controllers.append(file_document_controller.controller)
 
     exception_handler.error_handlers(controllers)
     for controller in controllers:
