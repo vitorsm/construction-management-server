@@ -38,5 +38,5 @@ class PostgresTaskRepository(PostgresGenericRepository[Task, TaskDB], TaskReposi
         session = self.get_session()
         task_histories_db = session.query(TaskHistoryDB).filter(
             and_(TaskHistoryDB.task_db.has(and_(TaskDB.project_id == project_id, TaskDB.deleted_at == None)))
-        ).all()
+        ).order_by(TaskHistoryDB.created_at.desc()).all()
         return [task_history.to_entity(fill_task=True) for task_history in task_histories_db]

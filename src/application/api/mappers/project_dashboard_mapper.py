@@ -21,6 +21,7 @@ class ProjectDashboardMapper:
             "expenses": {
                 "planned_cost": expense_project_details.planned_cost,
                 "actual_cost": expense_project_details.actual_cost,
-                "expenses_value_by_type": expense_project_details.expenses_value_by_type
+                "planned_expenses_value_by_type": expense_project_details.planned_expenses_value_by_type,
+                "actual_expenses_value_by_type": expense_project_details.actual_expenses_value_by_type,
             }
         }

@@ -44,6 +44,7 @@ class TaskMapper(GenericMapper[Task]):
             else:
                 root_tasks.append(task)
 
+        root_tasks.sort(key=lambda task: task.name)
         return GenericMapper.to_dtos(root_tasks, TaskMapper.to_dto)
 
     @staticmethod
@@ -52,12 +53,42 @@ class TaskMapper(GenericMapper[Task]):
             return None
 
         children = []
+        children_planned_start_date = []
+        children_planned_end_date = []
+        # children_actual_start_date = []
+        # children_actual_end_date = []
+
         if task.children_tasks:
             for child in task.children_tasks:
                 children.append(TaskMapper.to_dto(child))
 
-        start_date = task.actual_start_date if task.actual_start_date else task.planned_start_date
-        end_date = task.actual_end_date if task.actual_end_date else task.planned_end_date
+                if child.planned_start_date:
+                    children_planned_start_date.append(child.planned_start_date)
+                if child.planned_end_date:
+                    children_planned_end_date.append(child.planned_end_date)
+                # if child.actual_start_date:
+                #     children_actual_start_date.append(child.actual_start_date)
+                # if child.actual_end_date:
+                #     children_actual_end_date.append(child.actual_end_date)
+
+            children.sort(key=lambda t: t["name"])
+
+        planned_start_date = task.planned_start_date if task.planned_start_date else min(
+            children_planned_start_date) if children_planned_start_date else None
+        planned_end_date = task.planned_end_date if task.planned_end_date else max(
+            children_planned_end_date) if children_planned_end_date else None
+        # actual_start_date = task.actual_start_date if task.actual_start_date else min(
+        #     children_actual_start_date) if children_actual_start_date else None
+        # actual_end_date = task.actual_end_date if task.actual_end_date else max(
+        #     children_actual_end_date) if children_actual_end_date else None
+
+        task.planned_start_date = planned_start_date
+        task.planned_end_date = planned_end_date
+        # task.actual_start_date = actual_start_date
+        # task.actual_end_date = actual_end_date
+
+        start_date = task.actual_start_date if task.actual_start_date else planned_start_date
+        end_date = task.actual_end_date if task.actual_end_date else planned_end_date
 
         return {
             "id": str(task.id),
@@ -71,8 +102,8 @@ class TaskMapper(GenericMapper[Task]):
             "updated_by": {"id": str(task.updated_by.id)},
             "start_date": date_utils.datetime_to_iso(start_date),
             "end_date": date_utils.datetime_to_iso(end_date),
-            "planned_start_date": date_utils.datetime_to_iso(task.planned_start_date),
-            "planned_end_date": date_utils.datetime_to_iso(task.planned_end_date),
+            "planned_start_date": date_utils.datetime_to_iso(planned_start_date),
+            "planned_end_date": date_utils.datetime_to_iso(planned_end_date),
             "actual_start_date": date_utils.datetime_to_iso(task.actual_start_date),
             "actual_end_date": date_utils.datetime_to_iso(task.actual_end_date),
             "status": task.status.name,
@@ -80,5 +111,6 @@ class TaskMapper(GenericMapper[Task]):
             "files": task.files,
             "children": children,
             "parent_task_id": str(task.parent_task_id) if task.parent_task_id else None,
-            "expenses_values": task.get_expenses_value()
+            "planned_expenses_values": task.get_planned_expenses_value(),
+            "actual_expenses_values": task.get_actual_expenses_value()
         }

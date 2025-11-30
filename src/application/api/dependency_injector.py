@@ -41,9 +41,9 @@ class DependencyInjector(Module):
                                                     file_document_repository)
         project_service = ProjectService(authentication_repository, workspace_repository, project_repository)
         item_service = ItemService(authentication_repository, workspace_repository, item_repository)
-        expense_service = ExpenseService(authentication_repository, workspace_repository, expense_repository,
-                                         item_service, project_service)
         task_service = TaskService(authentication_repository, workspace_repository, task_repository, project_service)
+        expense_service = ExpenseService(authentication_repository, workspace_repository, expense_repository,
+                                         item_service, project_service, task_service)
 
         binder.bind(UserService, to=user_service, scope=singleton)
         binder.bind(ProjectService, to=project_service, scope=singleton)

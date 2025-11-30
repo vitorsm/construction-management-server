@@ -53,6 +53,6 @@ class TaskProjectDetails:
             self.qnt_tasks_by_status[task.status.name] += 1
 
         self.planned_start_date = min(planned_start_dates) if planned_start_dates else None
-        self.planned_end_date = min(planned_end_dates) if planned_end_dates else None
+        self.planned_end_date = max(planned_end_dates) if planned_end_dates else None
         self.actual_start_date = min(actual_start_dates) if actual_start_dates else None
-        self.actual_end_date = min(actual_end_dates) if actual_end_dates else None
+        self.actual_end_date = max(actual_end_dates) if actual_end_dates else None

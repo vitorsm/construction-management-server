@@ -1,0 +1,2005 @@
+[
+  {
+    "etapa": "01. Pré-Obra",
+    "subetapas": [
+      {
+        "subetapa": "1.1 Licenças e documentação",
+        "tarefas": [
+          {
+            "tarefa": "Levantamento cadastral do imóvel (certidão, matrícula, confrontações)",
+            "custo_estimado_R$": 500.00,
+            "start_at": 0,
+            "end_at": 5,
+            "custos_detalhados": [
+              {
+                "descricao": "Taxas de certidões e matrícula (Cartório de Registro de Imóveis)",
+                "valor_R$": 500.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Contratação de responsável técnico (CREA/CAU)",
+            "custo_estimado_R$": 18000.00,
+            "start_at": 0,
+            "end_at": 10,
+            "custos_detalhados": [
+              {
+                "descricao": "Honorários do RT (Engenheiro/Arquiteto) para acompanhamento da obra (fase inicial)",
+                "valor_R$": 18000.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Elaboração e aprovação de projetos: arquitetônico, estrutural, elétrico, hidráulico, prevenção de incêndio (se aplicável)",
+            "custo_estimado_R$": 15000.00,
+            "start_at": 5,
+            "end_at": 45,
+            "custos_detalhados": [
+              {
+                "descricao": "Honorários Projeto Arquitetônico",
+                "valor_R$": 5000.00
+              },
+              {
+                "descricao": "Honorários Projetos Complementares (Estrutural, Elétrico, Hidráulico)",
+                "valor_R$": 10000.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Solicitação e obtenção de alvará de construção na prefeitura",
+            "custo_estimado_R$": 4500.00,
+            "start_at": 45,
+            "end_at": 100,
+            "custos_detalhados": [
+              {
+                "descricao": "Taxas municipais para expedição do Alvará",
+                "valor_R$": 4500.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Licença ambiental (quando aplicável)",
+            "custo_estimado_R$": 1000.00,
+            "start_at": 45,
+            "end_at": 100,
+            "custos_detalhados": [
+              {
+                "descricao": "Taxas e estudos preliminares",
+                "valor_R$": 1000.00
+              }
+            ]
+          },
+          {
+            "tarefa": "ART/RRT do projeto e execução",
+            "custo_estimado_R$": 1200.00,
+            "start_at": 100,
+            "end_at": 105,
+            "custos_detalhados": [
+              {
+                "descricao": "Taxas de registro do projeto e execução no CREA/CAU",
+                "valor_R$": 1200.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "1.2 Planejamento e orçamento",
+        "tarefas": [
+          {
+            "tarefa": "Estudo topográfico e sondagem do solo (sonda de simples ou SPT se necessário)",
+            "custo_estimado_R$": 2500.00,
+            "start_at": 5,
+            "end_at": 15,
+            "custos_detalhados": [
+              {
+                "descricao": "Serviço de Topografia",
+                "valor_R$": 1000.00
+              },
+              {
+                "descricao": "Serviço de Sondagem SPT",
+                "valor_R$": 1500.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Memorial descritivo com materiais e acabamentos desejados",
+            "custo_estimado_R$": 0.00,
+            "start_at": 15,
+            "end_at": 30,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso nos honorários de Arquitetura",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Orçamento detalhado por serviços e materiais",
+            "custo_estimado_R$": 2000.00,
+            "start_at": 30,
+            "end_at": 50,
+            "custos_detalhados": [
+              {
+                "descricao": "Serviço de Orçamentista (BDI e CUB)",
+                "valor_R$": 2000.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Cronograma físico-financeiro preliminar",
+            "custo_estimado_R$": 0.00,
+            "start_at": 50,
+            "end_at": 60,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso nos honorários de Gerenciamento",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Definição do canteiro (localização do almoxarifado, banheiro, área de convivência)",
+            "custo_estimado_R$": 4000.00,
+            "start_at": 100,
+            "end_at": 105,
+            "custos_detalhados": [
+              {
+                "descricao": "Montagem/Aluguel de Container/Barracão",
+                "valor_R$": 2500.00
+              },
+              {
+                "descricao": "Instalações provisórias de água e energia",
+                "valor_R$": 1500.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "1.3 Contratações e logística",
+        "tarefas": [
+          {
+            "tarefa": "Seleção de empreiteira/contratados e assinatura de contratos",
+            "custo_estimado_R$": 500.00,
+            "start_at": 50,
+            "end_at": 80,
+            "custos_detalhados": [
+              {
+                "descricao": "Custo jurídico para elaboração de contratos",
+                "valor_R$": 500.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Contratação de mão de obra principal (pedreiros, armadores, carpinteiros, serventes, eletricista, encanador)",
+            "custo_estimado_R$": 0.00,
+            "start_at": 80,
+            "end_at": 100,
+            "custos_detalhados": [
+              {
+                "descricao": "Custo de M.O. distribuído nas etapas (Fundação, Estrutura, etc.)",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Contratação de fornecedores (cimento, ferro, blocos/tijolos, telhas, revestimentos)",
+            "custo_estimado_R$": 3000.00,
+            "start_at": 80,
+            "end_at": 100,
+            "custos_detalhados": [
+              {
+                "descricao": "Abertura de crédito/compra inicial de insumos básicos (cimento, areia)",
+                "valor_R$": 3000.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Planejamento de recebimento de materiais e armazenamento",
+            "custo_estimado_R$": 0.00,
+            "start_at": 100,
+            "end_at": 105,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso na gestão de obra (Canteiro)",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Segurança do trabalho: EPI, brigada, mapa de risco",
+            "custo_estimado_R$": 1500.00,
+            "start_at": 105,
+            "end_at": 108,
+            "custos_detalhados": [
+              {
+                "descricao": "Compra de EPIs e sinalização (Placas, Extintores)",
+                "valor_R$": 1000.00
+              },
+              {
+                "descricao": "Elaboração de PCMAT/PCMSO/Laudos",
+                "valor_R$": 500.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "1.4 Preparação do terreno",
+        "tarefas": [
+          {
+            "tarefa": "Limpeza do terreno (retirada de vegetação, entulho)",
+            "custo_estimado_R$": 1800.00,
+            "start_at": 105,
+            "end_at": 108,
+            "custos_detalhados": [
+              {
+                "descricao": "Mão de obra para limpeza/capina",
+                "valor_R$": 800.00
+              },
+              {
+                "descricao": "Aluguel de caçamba para descarte inicial de entulho",
+                "valor_R$": 1000.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Demarcação da obra (balizamento)",
+            "custo_estimado_R$": 1200.00,
+            "start_at": 108,
+            "end_at": 110,
+            "custos_detalhados": [
+              {
+                "descricao": "Mão de obra e material (madeira, arame, linhas)",
+                "valor_R$": 1200.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Nivelamento preliminar e escavação de valas para drenagem provisória",
+            "custo_estimado_R$": 4500.00,
+            "start_at": 110,
+            "end_at": 115,
+            "custos_detalhados": [
+              {
+                "descricao": "Locação de mini escavadeira / BobCat",
+                "valor_R$": 2500.00
+              },
+              {
+                "descricao": "Mão de obra para nivelamento",
+                "valor_R$": 2000.00
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "etapa": "02. Fundação",
+    "subetapas": [
+      {
+        "subetapa": "2.1 Sondagem e projeto de fundação (se aplicável)",
+        "tarefas": [
+          {
+            "tarefa": "Interpretação do relatório de sondagem",
+            "custo_estimado_R$": 0.00,
+            "start_at": 115,
+            "end_at": 116,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso no Projeto Estrutural",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Definição do tipo de fundação (sapatas isoladas, sapata corrida, radier, estacas)",
+            "custo_estimado_R$": 0.00,
+            "start_at": 116,
+            "end_at": 117,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso no Projeto Estrutural",
+                "valor_R$": 0.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "2.2 Escavações",
+        "tarefas": [
+          {
+            "tarefa": "Marcação das locações das fundações",
+            "custo_estimado_R$": 1000.00,
+            "start_at": 117,
+            "end_at": 118,
+            "custos_detalhados": [
+              {
+                "descricao": "Mão de obra para locação",
+                "valor_R$": 1000.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Escavação manual/mecânica das sapatas/estacas/canais",
+            "custo_estimado_R$": 3000.00,
+            "start_at": 118,
+            "end_at": 123,
+            "custos_detalhados": [
+              {
+                "descricao": "Mão de obra para escavação (serventes/pedreiros)",
+                "valor_R$": 3000.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Verificação de cotas e níveis",
+            "custo_estimado_R$": 0.00,
+            "start_at": 123,
+            "end_at": 124,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso na Mão de Obra de Fundação",
+                "valor_R$": 0.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "2.3 Artefatos e concretagem",
+        "tarefas": [
+          {
+            "tarefa": "Montagem das formas e armação de ferragens",
+            "custo_estimado_R$": 8500.00,
+            "start_at": 124,
+            "end_at": 128,
+            "custos_detalhados": [
+              {
+                "descricao": "Mão de obra (Armador e Carpinteiro)",
+                "valor_R$": 5000.00
+              },
+              {
+                "descricao": "Material (Aço/Ferro e Madeira/Compensado)",
+                "valor_R$": 3500.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Verificação de bitolas, dobramentos e grampos",
+            "custo_estimado_R$": 0.00,
+            "start_at": 128,
+            "end_at": 129,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso na Mão de Obra de Armação",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Montagem de formas para vigas baldrame e pilares de fundação",
+            "custo_estimado_R$": 4500.00,
+            "start_at": 129,
+            "end_at": 133,
+            "custos_detalhados": [
+              {
+                "descricao": "Mão de obra (Carpinteiro)",
+                "valor_R$": 2500.00
+              },
+              {
+                "descricao": "Material (Madeira/Compensado)",
+                "valor_R$": 2000.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Concretagem (controle de consistência, cura inicial)",
+            "custo_estimado_R$": 12000.00,
+            "start_at": 133,
+            "end_at": 134,
+            "custos_detalhados": [
+              {
+                "descricao": "Concreto usinado (Vigas Baldrame e Sapatas)",
+                "valor_R$": 12000.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Lançamento e adensamento do concreto",
+            "custo_estimado_R$": 0.00,
+            "start_at": 134,
+            "end_at": 135,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso no custo do concreto usinado e M.O.",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Cura do concreto (molhamento, cura química) por período indicado",
+            "custo_estimado_R$": 500.00,
+            "start_at": 135,
+            "end_at": 142,
+            "custos_detalhados": [
+              {
+                "descricao": "Mão de obra para molhagem e insumos de cura",
+                "valor_R$": 500.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "2.4 Drenagem e proteção",
+        "tarefas": [
+          {
+            "tarefa": "Execução de manta de brita e geomembrana se necessário",
+            "custo_estimado_R$": 0.00,
+            "start_at": 142,
+            "end_at": 143,
+            "custos_detalhados": [
+              {
+                "descricao": "Não considerado no padrão médio R2-P",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Impermeabilização de sapatas e baldrames (camada de proteção)",
+            "custo_estimado_R$": 3500.00,
+            "start_at": 143,
+            "end_at": 145,
+            "custos_detalhados": [
+              {
+                "descricao": "Mão de obra e material (argamassa polimérica)",
+                "valor_R$": 3500.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Aterro e compactação após liberação estrutural",
+            "custo_estimado_R$": 4000.00,
+            "start_at": 145,
+            "end_at": 148,
+            "custos_detalhados": [
+              {
+                "descricao": "Mão de obra (Serventes)",
+                "valor_R$": 2000.00
+              },
+              {
+                "descricao": "Aluguel de compactador de solo",
+                "valor_R$": 2000.00
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "etapa": "03. Estrutura",
+    "subetapas": [
+      {
+        "subetapa": "3.1 Pilares e vigas",
+        "tarefas": [
+          {
+            "tarefa": "Montagem de formas para pilares e vigas",
+            "custo_estimado_R$": 22000.00,
+            "start_at": 148,
+            "end_at": 154,
+            "custos_detalhados": [
+              {
+                "descricao": "Mão de obra (Carpinteiro e Armador)",
+                "valor_R$": 12000.00
+              },
+              {
+                "descricao": "Material (Madeira e Aço)",
+                "valor_R$": 10000.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Armação de pilares e vigas (prescrição conforme projeto)",
+            "custo_estimado_R$": 0.00,
+            "start_at": 154,
+            "end_at": 160,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso na Mão de Obra e Material acima",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Concretagem por etapas (pilares, vigas baldrame, vigas de amarração)",
+            "custo_estimado_R$": 18000.00,
+            "start_at": 160,
+            "end_at": 162,
+            "custos_detalhados": [
+              {
+                "descricao": "Concreto usinado para Estrutura",
+                "valor_R$": 18000.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Cura e desforma técnica",
+            "custo_estimado_R$": 0.00,
+            "start_at": 162,
+            "end_at": 167,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso na Mão de Obra de Estrutura",
+                "valor_R$": 0.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "3.2 Lajes",
+        "tarefas": [
+          {
+            "tarefa": "Tipos: laje maciça, pré-moldada, nervurada",
+            "custo_estimado_R$": 10500.00,
+            "start_at": 167,
+            "end_at": 169,
+            "custos_detalhados": [
+              {
+                "descricao": "Compra de Laje pré-moldada/treliçada (150 m²)",
+                "valor_R$": 10500.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Montagem de escoramento e cofragem",
+            "custo_estimado_R$": 7000.00,
+            "start_at": 169,
+            "end_at": 173,
+            "custos_detalhados": [
+              {
+                "descricao": "Mão de obra para montagem",
+                "valor_R$": 3500.00
+              },
+              {
+                "descricao": "Aluguel de escoramento e formas",
+                "valor_R$": 3500.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Armação de malha e vigas secundárias",
+            "custo_estimado_R$": 0.00,
+            "start_at": 173,
+            "end_at": 175,
+            "custos_detalhados": [
+              {
+                "descricao": "Material (malha/aço) incluso no custo da laje/estrutura",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Lançamento do concreto e cura",
+            "custo_estimado_R$": 0.00,
+            "start_at": 175,
+            "end_at": 182,
+            "custos_detalhados": [
+              {
+                "descricao": "Custo do concreto para laje está no item 3.1",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Verificação de prumo e empeno",
+            "custo_estimado_R$": 0.00,
+            "start_at": 182,
+            "end_at": 183,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso na Mão de Obra de Estrutura",
+                "valor_R$": 0.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "3.3 Escadas (se aplicável)",
+        "tarefas": [
+          {
+            "tarefa": "Forma e armação de escada",
+            "custo_estimado_R$": 0.00,
+            "start_at": 165,
+            "end_at": 170,
+            "custos_detalhados": [
+              {
+                "descricao": "Não considerado no padrão médio R2-P (custo extra)",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Concretagem e acabamento bruto",
+            "custo_estimado_R$": 0.00,
+            "start_at": 170,
+            "end_at": 177,
+            "custos_detalhados": [
+              {
+                "descricao": "Não considerado no padrão médio R2-P (custo extra)",
+                "valor_R$": 0.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "3.4 Verificações estruturais",
+        "tarefas": [
+          {
+            "tarefa": "Ensaios não destrutivos (quando necessário)",
+            "custo_estimado_R$": 0.00,
+            "start_at": 183,
+            "end_at": 185,
+            "custos_detalhados": [
+              {
+                "descricao": "Não considerado no padrão médio R2-P (custo extra)",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Controle dimensional e conferência com projeto",
+            "custo_estimado_R$": 0.00,
+            "start_at": 185,
+            "end_at": 186,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso na Mão de Obra de Estrutura/Gerenciamento",
+                "valor_R$": 0.00
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "etapa": "04. Alvenaria",
+    "subetapas": [
+      {
+        "subetapa": "4.1 Lançamento de pilares e vergas (preparação)",
+        "tarefas": [
+          {
+            "tarefa": "Instalação de vergas e cintas de amarração",
+            "custo_estimado_R$": 2500.00,
+            "start_at": 186,
+            "end_at": 188,
+            "custos_detalhados": [
+              {
+                "descricao": "Mão de obra e materiais (aço e concreto) para cintas",
+                "valor_R$": 2500.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Montagem de esquadrias provisórias para alinhamento",
+            "custo_estimado_R$": 0.00,
+            "start_at": 188,
+            "end_at": 189,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso na Mão de Obra de Alvenaria",
+                "valor_R$": 0.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "4.2 Assentamento de blocos/tijolos",
+        "tarefas": [
+          {
+            "tarefa": "Marcação de prumo, níveis e linhas guias",
+            "custo_estimado_R$": 0.00,
+            "start_at": 189,
+            "end_at": 190,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso na Mão de Obra de Alvenaria",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Assentamento com argamassa adequada (traço conforme projeto)",
+            "custo_estimado_R$": 18000.00,
+            "start_at": 190,
+            "end_at": 196,
+            "custos_detalhados": [
+              {
+                "descricao": "Material (Blocos/Tijolos e Argamassa)",
+                "valor_R$": 9000.00
+              },
+              {
+                "descricao": "Mão de obra para assentamento",
+                "valor_R$": 9000.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Execução de pilares de fechamento e cintas",
+            "custo_estimado_R$": 0.00,
+            "start_at": 196,
+            "end_at": 198,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso em 4.1 e 4.2",
+                "valor_R$": 0.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "4.3 Vedações internas e externas",
+        "tarefas": [
+          {
+            "tarefa": "Blocos de vedação e/ou vedação celular",
+            "custo_estimado_R$": 0.00,
+            "start_at": 198,
+            "end_at": 202,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso em 4.2",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Execução de juntas de dilatação quando necessário",
+            "custo_estimado_R$": 500.00,
+            "start_at": 202,
+            "end_at": 203,
+            "custos_detalhados": [
+              {
+                "descricao": "Mão de obra e material selante",
+                "valor_R$": 500.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "4.4 Reforços e aberturas",
+        "tarefas": [
+          {
+            "tarefa": "Prevê e executar vergas, lintéis, e contravidros",
+            "custo_estimado_R$": 0.00,
+            "start_at": 203,
+            "end_at": 205,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso em 4.1 e 4.2",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Verificação de abertura para portas e janelas",
+            "custo_estimado_R$": 0.00,
+            "start_at": 205,
+            "end_at": 206,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso na Mão de Obra de Alvenaria",
+                "valor_R$": 0.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "4.5 Almofadas e contrapisos preparatórios",
+        "tarefas": [
+          {
+            "tarefa": "Regularização de áreas para contrapiso e revestimento",
+            "custo_estimado_R$": 4500.00,
+            "start_at": 206,
+            "end_at": 210,
+            "custos_detalhados": [
+              {
+                "descricao": "Mão de obra para contrapiso (Serventes/Pedreiros)",
+                "valor_R$": 2000.00
+              },
+              {
+                "descricao": "Material (Cimento, Areia)",
+                "valor_R$": 2500.00
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "etapa": "05. Cobertura",
+    "subetapas": [
+      {
+        "subetapa": "5.1 Estrutura do telhado",
+        "tarefas": [
+          {
+            "tarefa": "Montagem de tesouras/caibros/cumeeiras ou estrutura metálica",
+            "custo_estimado_R$": 14000.00,
+            "start_at": 210,
+            "end_at": 214,
+            "custos_detalhados": [
+              {
+                "descricao": "Mão de obra (Carpinteiro/Telhadista)",
+                "valor_R$": 5000.00
+              },
+              {
+                "descricao": "Material (Madeiramento para telhado)",
+                "valor_R$": 9000.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Instalação de subcobertura (opcional: manta, sarrafo)",
+            "custo_estimado_R$": 0.00,
+            "start_at": 214,
+            "end_at": 215,
+            "custos_detalhados": [
+              {
+                "descricao": "Não considerado no padrão médio R2-P (custo extra)",
+                "valor_R$": 0.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "5.2 Cobertura final",
+        "tarefas": [
+          {
+            "tarefa": "Assentamento de telhas (cerâmica, metálica, fibrocimento, etc.)",
+            "custo_estimado_R$": 8000.00,
+            "start_at": 215,
+            "end_at": 218,
+            "custos_detalhados": [
+              {
+                "descricao": "Mão de obra para assentamento de telhas",
+                "valor_R$": 3000.00
+              },
+              {
+                "descricao": "Material (Telhas cerâmicas)",
+                "valor_R$": 5000.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Fixação e vedação de cumeeiras e rufos",
+            "custo_estimado_R$": 0.00,
+            "start_at": 218,
+            "end_at": 219,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso na Mão de Obra de Cobertura",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Execução de rufos e flashings em encontros com paredes",
+            "custo_estimado_R$": 3500.00,
+            "start_at": 219,
+            "end_at": 221,
+            "custos_detalhados": [
+              {
+                "descricao": "Material (Rufos e cumeeiras metálicas)",
+                "valor_R$": 2000.00
+              },
+              {
+                "descricao": "Mão de obra para instalação",
+                "valor_R$": 1500.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "5.3 Impermeabilização",
+        "tarefas": [
+          {
+            "tarefa": "Impermeabilização de platibandas, ralos de cobertura e áreas de convívio",
+            "custo_estimado_R$": 1500.00,
+            "start_at": 221,
+            "end_at": 223,
+            "custos_detalhados": [
+              {
+                "descricao": "Mão de obra e material (manta líquida)",
+                "valor_R$": 1500.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Verificação de inclinações e condicionamento de escoamento",
+            "custo_estimado_R$": 0.00,
+            "start_at": 223,
+            "end_at": 224,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso na Mão de Obra de Cobertura",
+                "valor_R$": 0.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "5.4 Calhas e condutores pluviais",
+        "tarefas": [
+          {
+            "tarefa": "Instalação de calhas, rufos e condutores pluviais até o ponto de descarte",
+            "custo_estimado_R$": 3000.00,
+            "start_at": 224,
+            "end_at": 226,
+            "custos_detalhados": [
+              {
+                "descricao": "Material (Calhas e tubos de PVC/metal)",
+                "valor_R$": 1800.00
+              },
+              {
+                "descricao": "Mão de obra para instalação",
+                "valor_R$": 1200.00
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "etapa": "06. Hidráulica",
+    "subetapas": [
+      {
+        "subetapa": "6.1 Projeto e planejamento",
+        "tarefas": [
+          {
+            "tarefa": "Plantas hidráulicas: água fria, água quente (se houver), esgoto, águas pluviais",
+            "custo_estimado_R$": 0.00,
+            "start_at": 186,
+            "end_at": 188,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso no Projeto Complementar (Etapa 1.1)",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Dimensionamento de reservatórios, elevatórias e bombas",
+            "custo_estimado_R$": 0.00,
+            "start_at": 188,
+            "end_at": 190,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso no Projeto Complementar (Etapa 1.1)",
+                "valor_R$": 0.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "6.2 Tubulações embutidas",
+        "tarefas": [
+          {
+            "tarefa": "Caminhos e eletrocalhas para passagens embutidas",
+            "custo_estimado_R$": 0.00,
+            "start_at": 190,
+            "end_at": 192,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso em 7.2 (Passagem de Eletrodutos)",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Montagem de tubulações (PVC, PPR, cobre) conforme normas",
+            "custo_estimado_R$": 12000.00,
+            "start_at": 192,
+            "end_at": 198,
+            "custos_detalhados": [
+              {
+                "descricao": "Material (Tubos e conexões PVC, PPR)",
+                "valor_R$": 7000.00
+              },
+              {
+                "descricao": "Mão de obra (Encanador/Hidráulica)",
+                "valor_R$": 5000.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Posicionamento de caixas de inspeção e caixas sifonadas",
+            "custo_estimado_R$": 1800.00,
+            "start_at": 198,
+            "end_at": 200,
+            "custos_detalhados": [
+              {
+                "descricao": "Material (Caixas de gordura/inspeção, sifonadas)",
+                "valor_R$": 1000.00
+              },
+              {
+                "descricao": "Mão de obra para instalação",
+                "valor_R$": 800.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "6.3 Pontos hidráulicos",
+        "tarefas": [
+          {
+            "tarefa": "Instalação de pontos de cozinha, banheiros, áreas de serviço e pontos externos",
+            "custo_estimado_R$": 0.00,
+            "start_at": 200,
+            "end_at": 204,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso na Mão de Obra e Material acima",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Instalação de ramais de esgoto e ventilação",
+            "custo_estimado_R$": 0.00,
+            "start_at": 204,
+            "end_at": 206,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso na Mão de Obra e Material acima",
+                "valor_R$": 0.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "6.4 Testes e comissionamento",
+        "tarefas": [
+          {
+            "tarefa": "Teste de estanqueidade (pressurização e teste por estanqueidade)",
+            "custo_estimado_R$": 0.00,
+            "start_at": 206,
+            "end_at": 208,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso na Mão de Obra de Hidráulica",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Teste de escoamento e desobstrução",
+            "custo_estimado_R$": 0.00,
+            "start_at": 208,
+            "end_at": 209,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso na Mão de Obra de Hidráulica",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Inspeção de ralos e declividades",
+            "custo_estimado_R$": 0.00,
+            "start_at": 209,
+            "end_at": 210,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso na Mão de Obra de Hidráulica",
+                "valor_R$": 0.00
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "etapa": "07. Elétrica",
+    "subetapas": [
+      {
+        "subetapa": "7.1 Projeto elétrico",
+        "tarefas": [
+          {
+            "tarefa": "Planta de cargas, quadros, circuitos, iluminação e tomadas",
+            "custo_estimado_R$": 0.00,
+            "start_at": 186,
+            "end_at": 188,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso no Projeto Complementar (Etapa 1.1)",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Dimensionamento de condutores, disjuntores, DPS e DR",
+            "custo_estimado_R$": 0.00,
+            "start_at": 188,
+            "end_at": 190,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso no Projeto Complementar (Etapa 1.1)",
+                "valor_R$": 0.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "7.2 Eletrodutos e conduítes",
+        "tarefas": [
+          {
+            "tarefa": "Passagem de eletrodutos embutidos e colocação de caixas de passagem",
+            "custo_estimado_R$": 8000.00,
+            "start_at": 190,
+            "end_at": 196,
+            "custos_detalhados": [
+              {
+                "descricao": "Mão de obra (Eletricista) - Embutimento",
+                "valor_R$": 4000.00
+              },
+              {
+                "descricao": "Material (Eletrodutos, Caixas de Passagem, Conexões)",
+                "valor_R$": 4000.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Fixação e travamento conforme traçado",
+            "custo_estimado_R$": 0.00,
+            "start_at": 196,
+            "end_at": 198,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso na Mão de Obra acima",
+                "valor_R$": 0.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "7.3 Cabeamento e instalação",
+        "tarefas": [
+          {
+            "tarefa": "Puxada de condutores, aterramento e montagem de quadros de distribuição",
+            "custo_estimado_R$": 15000.00,
+            "start_at": 226,
+            "end_at": 232,
+            "custos_detalhados": [
+              {
+                "descricao": "Mão de obra (Eletricista) - Cabeamento e QDC",
+                "valor_R$": 7000.00
+              },
+              {
+                "descricao": "Material (Fios, Cabos, Aterramento, Quadros, Disjuntores)",
+                "valor_R$": 8000.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Instalação de pontos de iluminação, interruptores e tomadas",
+            "custo_estimado_R$": 0.00,
+            "start_at": 232,
+            "end_at": 238,
+            "custos_detalhados": [
+              {
+                "descricao": "Mão de obra (Eletricista) - Instalação de Placas/Módulos",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Instalação de pontos especiais (ar-condicionado, forno, chuveiro elétrico)",
+            "custo_estimado_R$": 2500.00,
+            "start_at": 238,
+            "end_at": 240,
+            "custos_detalhados": [
+              {
+                "descricao": "Material (Cabos de maior bitola, proteções)",
+                "valor_R$": 1500.00
+              },
+              {
+                "descricao": "Mão de obra (Eletricista)",
+                "valor_R$": 1000.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "7.4 Medidas e testes",
+        "tarefas": [
+          {
+            "tarefa": "Medição de continuidade, isolamento, aterramento (Ohmímetro)",
+            "custo_estimado_R$": 0.00,
+            "start_at": 240,
+            "end_at": 241,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso na Mão de Obra de Eletricista",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Teste de funcionamento dos circuitos e label dos quadros",
+            "custo_estimado_R$": 0.00,
+            "start_at": 241,
+            "end_at": 242,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso na Mão de Obra de Eletricista",
+                "valor_R$": 0.00
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "etapa": "08. Esquadrias",
+    "subetapas": [
+      {
+        "subetapa": "8.1 Projeto e aquisição",
+        "tarefas": [
+          {
+            "tarefa": "Definição de materiais (madeira, alumínio, PVC)",
+            "custo_estimado_R$": 0.00,
+            "start_at": 186,
+            "end_at": 190,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso em Projeto Arquitetônico",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Medição de vãos (apos verificação estrutural)",
+            "custo_estimado_R$": 0.00,
+            "start_at": 190,
+            "end_at": 192,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso na Mão de Obra de Alvenaria",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Pedido e conferência de esquadrias",
+            "custo_estimado_R$": 18000.00,
+            "start_at": 192,
+            "end_at": 220,
+            "custos_detalhados": [
+              {
+                "descricao": "Compra de portas e janelas (Alumínio Padrão Médio)",
+                "valor_R$": 18000.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "8.2 Instalação",
+        "tarefas": [
+          {
+            "tarefa": "Assentamento e nivelamento de portas e janelas",
+            "custo_estimado_R$": 4500.00,
+            "start_at": 220,
+            "end_at": 224,
+            "custos_detalhados": [
+              {
+                "descricao": "Mão de obra para instalação (Pedreiro/Instalador)",
+                "valor_R$": 4500.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Execução de contra-marcos e rasgos para fixação",
+            "custo_estimado_R$": 0.00,
+            "start_at": 224,
+            "end_at": 226,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso na Mão de Obra acima",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Selagem e calafetagem com manta ou silicone",
+            "custo_estimado_R$": 0.00,
+            "start_at": 226,
+            "end_at": 228,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso na Mão de Obra acima",
+                "valor_R$": 0.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "8.3 Ferragens e acabamentos",
+        "tarefas": [
+          {
+            "tarefa": "Instalação de fechaduras, dobradiças, batentes e trinco",
+            "custo_estimado_R$": 2000.00,
+            "start_at": 260,
+            "end_at": 263,
+            "custos_detalhados": [
+              {
+                "descricao": "Material (Fechaduras, Dobradiças, Puxadores)",
+                "valor_R$": 1500.00
+              },
+              {
+                "descricao": "Mão de obra (Chaveiro/Montador)",
+                "valor_R$": 500.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Verificação de vedação, cursos e acionamento",
+            "custo_estimado_R$": 0.00,
+            "start_at": 263,
+            "end_at": 264,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso na Mão de Obra de Instalação",
+                "valor_R$": 0.00
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "etapa": "09. Revestimentos",
+    "subetapas": [
+      {
+        "subetapa": "9.1 Preparação de superfícies",
+        "tarefas": [
+          {
+            "tarefa": "Regularização e chapisco quando necessário",
+            "custo_estimado_R$": 0.00,
+            "start_at": 210,
+            "end_at": 212,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso no Emboço/Reboco",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Aplicação de emboço/reboco (interno e externo)",
+            "custo_estimado_R$": 30000.00,
+            "start_at": 212,
+            "end_at": 220,
+            "custos_detalhados": [
+              {
+                "descricao": "Mão de obra (Pedreiros/Serventes)",
+                "valor_R$": 15000.00
+              },
+              {
+                "descricao": "Material (Cimento, Cal, Areia)",
+                "valor_R$": 15000.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Cura e tempo de espera antes do assentamento",
+            "custo_estimado_R$": 0.00,
+            "start_at": 220,
+            "end_at": 225,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso na Mão de Obra de Reboco",
+                "valor_R$": 0.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "9.2 Pisos e azulejos",
+        "tarefas": [
+          {
+            "tarefa": "Assentamento de pisos (regularização do contrapiso, argamassa colante)",
+            "custo_estimado_R$": 35000.00,
+            "start_at": 225,
+            "end_at": 232,
+            "custos_detalhados": [
+              {
+                "descricao": "Mão de obra (Azulejista)",
+                "valor_R$": 10000.00
+              },
+              {
+                "descricao": "Material (Piso e Revestimento Cerâmico/Porcelanato)",
+                "valor_R$": 15000.00
+              },
+              {
+                "descricao": "Material (Argamassa Colante e Rejunte)",
+                "valor_R$": 10000.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Assentamento de azulejos e pastilhas (cozinha, banheiros)",
+            "custo_estimado_R$": 0.00,
+            "start_at": 232,
+            "end_at": 238,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso no item anterior",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Corte, junta e rejuntamento",
+            "custo_estimado_R$": 0.00,
+            "start_at": 238,
+            "end_at": 240,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso no item anterior",
+                "valor_R$": 0.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "9.3 Revestimentos especiais",
+        "tarefas": [
+          {
+            "tarefa": "Revestimentos cerâmicos, cimentícios, pedras naturais, porcelanato",
+            "custo_estimado_R$": 0.00,
+            "start_at": 240,
+            "end_at": 245,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso em 9.2",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Instalação de rodapés e soleiras",
+            "custo_estimado_R$": 4000.00,
+            "start_at": 245,
+            "end_at": 248,
+            "custos_detalhados": [
+              {
+                "descricao": "Mão de obra (Azulejista)",
+                "valor_R$": 1500.00
+              },
+              {
+                "descricao": "Material (Soleiras e Rodapés)",
+                "valor_R$": 2500.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "9.4 Impermeabilizações localizadas",
+        "tarefas": [
+          {
+            "tarefa": "Box de banheiro, base de varanda, área de serviço (mantas e argamassas colantes específicas)",
+            "custo_estimado_R$": 2000.00,
+            "start_at": 225,
+            "end_at": 227,
+            "custos_detalhados": [
+              {
+                "descricao": "Mão de obra e material (Manta líquida/polimérica)",
+                "valor_R$": 2000.00
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "etapa": "10. Pintura",
+    "subetapas": [
+      {
+        "subetapa": "10.1 Preparação",
+        "tarefas": [
+          {
+            "tarefa": "Lixamento, aplicação de massa corrida e selador",
+            "custo_estimado_R$": 10000.00,
+            "start_at": 248,
+            "end_at": 252,
+            "custos_detalhados": [
+              {
+                "descricao": "Mão de obra (Pintor) - Lixamento e Massa",
+                "valor_R$": 6000.00
+              },
+              {
+                "descricao": "Material (Massa corrida, Lixas, Selador)",
+                "valor_R$": 4000.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Limpeza de superfícies e remoção de pó",
+            "custo_estimado_R$": 0.00,
+            "start_at": 252,
+            "end_at": 253,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso na Mão de Obra de Pintura",
+                "valor_R$": 0.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "10.2 Pintura externa",
+        "tarefas": [
+          {
+            "tarefa": "Aplicação de fundo e demãos de tinta acrílica ou texturizada",
+            "custo_estimado_R$": 0.00,
+            "start_at": 253,
+            "end_at": 257,
+            "custos_detalhados": [
+              {
+                "descricao": "Custo da M.O. e Tinta Externa está em 10.3",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Proteção de esquadrias e rufos",
+            "custo_estimado_R$": 0.00,
+            "start_at": 257,
+            "end_at": 258,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso na Mão de Obra de Pintura",
+                "valor_R$": 0.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "10.3 Pintura interna",
+        "tarefas": [
+          {
+            "tarefa": "Aplicação de fundo, massa e demãos de tinta látex/aspecto desejado",
+            "custo_estimado_R$": 15000.00,
+            "start_at": 258,
+            "end_at": 264,
+            "custos_detalhados": [
+              {
+                "descricao": "Mão de obra (Pintor) - 3 demãos",
+                "valor_R$": 8000.00
+              },
+              {
+                "descricao": "Material (Tintas Látex/Acrílica e complementos)",
+                "valor_R$": 7000.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Pintura de esquadrias internas (verniz, esmalte)",
+            "custo_estimado_R$": 0.00,
+            "start_at": 264,
+            "end_at": 266,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso na Mão de Obra e Material acima",
+                "valor_R$": 0.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "10.4 Pinturas especiais",
+        "tarefas": [
+          {
+            "tarefa": "Revestimentos impermeáveis, pintura epóxi (garagens) ou esmalte sintético",
+            "custo_estimado_R$": 0.00,
+            "start_at": 266,
+            "end_at": 268,
+            "custos_detalhados": [
+              {
+                "descricao": "Não considerado no padrão médio R2-P (custo extra)",
+                "valor_R$": 0.00
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "etapa": "11. Acabamentos",
+    "subetapas": [
+      {
+        "subetapa": "11.1 Louças e metais",
+        "tarefas": [
+          {
+            "tarefa": "Instalação de vasos sanitários, pias, cubas e mesas de apoio",
+            "custo_estimado_R$": 9000.00,
+            "start_at": 268,
+            "end_at": 270,
+            "custos_detalhados": [
+              {
+                "descricao": "Material (Vasos Sanitários e Cubas)",
+                "valor_R$": 6000.00
+              },
+              {
+                "descricao": "Mão de obra (Instalador/Encanador)",
+                "valor_R$": 3000.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Torneiras, misturadores, duchas e ralos",
+            "custo_estimado_R$": 0.00,
+            "start_at": 270,
+            "end_at": 272,
+            "custos_detalhados": [
+              {
+                "descricao": "Material (Torneiras, Duchas e Metais)",
+                "valor_R$": 0.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "11.2 Marcenaria e móveis embutidos",
+        "tarefas": [
+          {
+            "tarefa": "Medição final e instalação de armários de cozinha, roupeiros e painéis",
+            "custo_estimado_R$": 15000.00,
+            "start_at": 272,
+            "end_at": 276,
+            "custos_detalhados": [
+              {
+                "descricao": "Orçamento de Marcenaria (Armários Cozinha/Banheiro)",
+                "valor_R$": 15000.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Bancadas (granito, quartzo) e ajuste de vãos",
+            "custo_estimado_R$": 0.00,
+            "start_at": 276,
+            "end_at": 278,
+            "custos_detalhados": [
+              {
+                "descricao": "Material e Mão de obra para Bancadas de Pedra",
+                "valor_R$": 0.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "11.3 Pisos finais e revestimentos delicados",
+        "tarefas": [
+          {
+            "tarefa": "Colocação de sancas, rodapés finais e acabamentos de gesso",
+            "custo_estimado_R$": 5000.00,
+            "start_at": 278,
+            "end_at": 280,
+            "custos_detalhados": [
+              {
+                "descricao": "Mão de obra (Gesseiro) e Material (Gesso)",
+                "valor_R$": 5000.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Colagem de espelhos e acabamentos de vidro",
+            "custo_estimado_R$": 0.00,
+            "start_at": 280,
+            "end_at": 281,
+            "custos_detalhados": [
+              {
+                "descricao": "Não considerado no padrão médio R2-P (custo extra)",
+                "valor_R$": 0.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "11.4 Iluminação e automação",
+        "tarefas": [
+          {
+            "tarefa": "Instalação de luminárias finais, dimmers e controles",
+            "custo_estimado_R$": 4500.00,
+            "start_at": 281,
+            "end_at": 283,
+            "custos_detalhados": [
+              {
+                "descricao": "Material (Luminárias e Lâmpadas)",
+                "valor_R$": 3500.00
+              },
+              {
+                "descricao": "Mão de obra (Eletricista) para instalação",
+                "valor_R$": 1000.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Teste e configuração de sistemas de automação (se houver)",
+            "custo_estimado_R$": 0.00,
+            "start_at": 283,
+            "end_at": 285,
+            "custos_detalhados": [
+              {
+                "descricao": "Não considerado no padrão médio R2-P (custo extra)",
+                "valor_R$": 0.00
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "etapa": "12. Limpeza",
+    "subetapas": [
+      {
+        "subetapa": "12.1 Limpeza pesada (pós-obra)",
+        "tarefas": [
+          {
+            "tarefa": "Remoção de pó, restos de argamassa e respingos de tinta",
+            "custo_estimado_R$": 3000.00,
+            "start_at": 285,
+            "end_at": 287,
+            "custos_detalhados": [
+              {
+                "descricao": "Mão de obra (Equipe de Limpeza)",
+                "valor_R$": 2500.00
+              },
+              {
+                "descricao": "Material (Produtos químicos e insumos)",
+                "valor_R$": 500.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Lavagem de pisos e fachadas",
+            "custo_estimado_R$": 0.00,
+            "start_at": 287,
+            "end_at": 288,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso na Mão de Obra acima",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Limpeza de caixas de gordura e caixas de passagem",
+            "custo_estimado_R$": 0.00,
+            "start_at": 288,
+            "end_at": 289,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso na Mão de Obra acima",
+                "valor_R$": 0.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "12.2 Limpeza fina",
+        "tarefas": [
+          {
+            "tarefa": "Limpeza de vidros, limpeza de rodapés e acabamentos",
+            "custo_estimado_R$": 0.00,
+            "start_at": 289,
+            "end_at": 290,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso na Mão de Obra acima",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Revisão de pequenos retoques em pintura e rejuntes",
+            "custo_estimado_R$": 0.00,
+            "start_at": 290,
+            "end_at": 291,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso na Mão de Obra da Punch List (Etapa 13.1)",
+                "valor_R$": 0.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "12.3 Retirada de entulhos e destinação",
+        "tarefas": [
+          {
+            "tarefa": "Separação de resíduos recicláveis e não recicláveis",
+            "custo_estimado_R$": 0.00,
+            "start_at": 291,
+            "end_at": 292,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso na Mão de Obra (Serventes)",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Transporte para pontos de descarte autorizados",
+            "custo_estimado_R$": 4500.00,
+            "start_at": 292,
+            "end_at": 294,
+            "custos_detalhados": [
+              {
+                "descricao": "Aluguel de Caçambas para descarte final (3 unidades)",
+                "valor_R$": 4500.00
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "etapa": "13. Pós-Obra",
+    "subetapas": [
+      {
+        "subetapa": "13.1 Vistorias e entrega",
+        "tarefas": [
+          {
+            "tarefa": "Checklist de entrega: hidráulica, elétrica, esquadrias, acabamentos",
+            "custo_estimado_R$": 0.00,
+            "start_at": 294,
+            "end_at": 295,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso nos honorários do RT",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Vistoria conjunta com o responsável técnico e proprietário",
+            "custo_estimado_R$": 0.00,
+            "start_at": 295,
+            "end_at": 296,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso nos honorários do RT",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Elaboração de lista de pendências (punch list)",
+            "custo_estimado_R$": 5000.00,
+            "start_at": 296,
+            "end_at": 298,
+            "custos_detalhados": [
+              {
+                "descricao": "Reserva técnica para retrabalho (Punch List)",
+                "valor_R$": 5000.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "13.2 Garantias e documentação",
+        "tarefas": [
+          {
+            "tarefa": "Entrega de as-built (plantas como executadas) e manual de manutenção",
+            "custo_estimado_R$": 0.00,
+            "start_at": 298,
+            "end_at": 300,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso nos honorários do RT",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Garantias de materiais e serviços (prazo e responsáveis)",
+            "custo_estimado_R$": 0.00,
+            "start_at": 300,
+            "end_at": 305,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso nos contratos e fornecedores",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Regularização final na prefeitura (habite-se), quando aplicável",
+            "custo_estimado_R$": 2500.00,
+            "start_at": 305,
+            "end_at": 315,
+            "custos_detalhados": [
+              {
+                "descricao": "Taxas municipais para expedição do Habite-se",
+                "valor_R$": 2500.00
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "subetapa": "13.3 Manutenção inicial",
+        "tarefas": [
+          {
+            "tarefa": "Planejamento de manutenção preventiva (30/60/90 dias)",
+            "custo_estimado_R$": 0.00,
+            "start_at": 315,
+            "end_at": 316,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso na Mão de Obra do RT",
+                "valor_R$": 0.00
+              }
+            ]
+          },
+          {
+            "tarefa": "Primeira verificação de recalques, infiltrações e vazamentos",
+            "custo_estimado_R$": 0.00,
+            "start_at": 316,
+            "end_at": 317,
+            "custos_detalhados": [
+              {
+                "descricao": "Incluso na Mão de Obra do RT",
+                "valor_R$": 0.00
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

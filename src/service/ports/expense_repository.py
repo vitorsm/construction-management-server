@@ -11,3 +11,7 @@ class ExpenseRepository(GenericEntityRepository, metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def find_by_project(self, project_id: UUID) -> List[Expense]:
         raise NotImplementedError
+
+    @abc.abstractmethod
+    def find_by_task(self, task_id: UUID) -> List[Expense]:
+        raise NotImplementedError

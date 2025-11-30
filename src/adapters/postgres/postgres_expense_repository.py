@@ -25,3 +25,9 @@ class PostgresExpenseRepository(PostgresGenericRepository[Expense, ExpenseDB], E
         expenses_db = session.query(ExpenseDB).filter(
             and_(ExpenseDB.project_id == project_id, ExpenseDB.deleted_at == None)).all()
         return [expense_db.to_entity() for expense_db in expenses_db]
+
+    def find_by_task(self, task_id: UUID) -> List[Expense]:
+        session = self.get_session()
+        expenses_db = session.query(ExpenseDB).filter(
+            and_(ExpenseDB.task_id == task_id, ExpenseDB.deleted_at == None)).all()
+        return [expense_db.to_entity() for expense_db in expenses_db]

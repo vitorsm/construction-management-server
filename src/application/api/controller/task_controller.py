@@ -4,8 +4,10 @@ from injector import Injector
 
 from src.application.api.controller.generic_entity_controller import GenericEntityController
 from src.application.api.mappers import uuid_mapper
+from src.application.api.mappers.expense_mapper import ExpenseMapper
 from src.application.api.mappers.task_history_mapper import TaskHistoryMapper
 from src.application.api.mappers.task_mapper import TaskMapper
+from src.service.expense_service import ExpenseService
 from src.service.task_service import TaskService
 
 
@@ -36,3 +38,14 @@ class TaskController(GenericEntityController[TaskService, TaskMapper]):
             task_service.create_task_history(task_uuid, task_history)
 
             return jsonify(TaskHistoryMapper.to_dto(task_history)), 201
+
+        @self.get_controller().route("/<string:task_id>/expenses")
+        @jwt_required()
+        def get_tasks_by_project(task_id: str):
+            uuid_task_id = uuid_mapper.to_uuid(task_id)
+
+            expense_service = self.app_injector.get(ExpenseService)
+            expenses = expense_service.find_by_task(uuid_task_id)
+            expenses_dto = [ExpenseMapper.to_dto(expense) for expense in expenses]
+
+            return jsonify(expenses_dto)

@@ -13,16 +13,19 @@ from src.service.ports.expense_repository import ExpenseRepository
 from src.service.ports.generic_entity_repository import GenericEntityRepository
 from src.service.ports.workspace_repository import WorkspaceRepository
 from src.service.project_service import ProjectService
+from src.service.task_service import TaskService
 
 
 class ExpenseService(GenericService[Expense]):
     def __init__(self, authentication_repository: AuthenticationRepository, workspace_repository: WorkspaceRepository,
-                 expense_repository: ExpenseRepository, item_service: ItemService, project_service: ProjectService):
+                 expense_repository: ExpenseRepository, item_service: ItemService, project_service: ProjectService,
+                 task_service: TaskService):
         self.__authentication_repository = authentication_repository
         self.__workspace_repository = workspace_repository
         self.__expense_repository = expense_repository
         self.__item_service = item_service
         self.__project_service = project_service
+        self.__task_service = task_service
 
     def get_authentication_repository(self) -> AuthenticationRepository:
         return self.__authentication_repository
@@ -59,3 +62,7 @@ class ExpenseService(GenericService[Expense]):
 
     def get_expense_project_details(self, project_id: UUID) -> ExpenseProjectDetails:
         return ExpenseProjectDetails(self.find_expenses_by_project(project_id))
+
+    def find_by_task(self, task_id: UUID) -> List[Expense]:
+        task = self.__task_service.find_by_id(task_id)
+        return self.__expense_repository.find_by_task(task.id)

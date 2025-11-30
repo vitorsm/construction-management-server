@@ -13,6 +13,7 @@ from src.service.ports.authentication_repository import AuthenticationRepository
 from src.service.ports.expense_repository import ExpenseRepository
 from src.service.ports.workspace_repository import WorkspaceRepository
 from src.service.project_service import ProjectService
+from src.service.task_service import TaskService
 from tests.mocks import expense_mock, item_mock, project_mock
 from tests.unit_tests.services.generic_service_test import GenericServiceTest
 
@@ -24,9 +25,11 @@ class TestExpenseService(GenericServiceTest, TestCase):
         self.expense_repository = Mock(spec_set=ExpenseRepository)
         self.item_service = Mock(spec_set=ItemService)
         self.project_service = Mock(spec_set=ProjectService)
+        self.task_service = Mock(spec_set=TaskService)
 
         self.service = ExpenseService(self.authentication_repository, self.workspace_repository,
-                                      self.expense_repository, self.item_service, self.project_service)
+                                      self.expense_repository, self.item_service, self.project_service,
+                                      self.task_service)
 
         self.valid_item = item_mock.get_valid_item()
         self.valid_expense = expense_mock.get_valid_expense()

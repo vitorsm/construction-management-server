@@ -5,7 +5,7 @@ from typing import List, Optional
 from uuid import UUID, uuid4
 
 from src.entities.exceptions.invalid_entity_exception import InvalidEntityException
-from src.entities.expense import Expense
+from src.entities.expense import Expense, ExpenseClass
 from src.entities.generic_entity import GenericEntity
 from src.entities.project import Project
 from src.entities.user import User
@@ -103,12 +103,29 @@ class Task(GenericEntity):
 
         self.children_tasks.append(task)
 
-    def get_expenses_value(self) -> float:
-        self_expense_values = sum(expense.value for expense in self.expenses) if self.expenses else 0
+    def get_planned_expenses_value(self) -> float:
+        expenses = self.__get_expenses_by_class(ExpenseClass.PLANNING)
+        self_expense_values = sum(expense.value for expense in expenses) if expenses else 0
 
         if self.children_tasks:
             for child_task in self.children_tasks:
-                self_expense_values += child_task.get_expenses_value()
+                self_expense_values += child_task.get_planned_expenses_value()
 
         return self_expense_values
+
+    def get_actual_expenses_value(self) -> float:
+        expenses = self.__get_expenses_by_class(ExpenseClass.EXECUTION)
+        self_expense_values = sum(expense.value for expense in expenses) if expenses else 0
+
+        if self.children_tasks:
+            for child_task in self.children_tasks:
+                self_expense_values += child_task.get_actual_expenses_value()
+
+        return self_expense_values
+
+    def __get_expenses_by_class(self, expense_class: ExpenseClass) -> List[Expense]:
+        if not self.expenses:
+            return []
+
+        return [expense for expense in self.expenses if expense.expense_class == expense_class]
 
