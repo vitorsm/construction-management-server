@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_testing import TestCase
 from injector import Injector
 from sqlalchemy import Engine
+from sqlalchemy.orm import Session
 
 from src.adapters.postgres.db_instance import DBInstance
 from src.application.api import register_controllers, DependencyInjector
@@ -37,6 +38,9 @@ class TestDBInstance(DBInstance):
 
     def get_db_engine(self) -> Engine:
         return self.__get_sql_alchemy_instance().engine
+
+    def get_session(self) -> Session:
+        return self.sql_alchemy.session
 
 
 class BaseAPITest(TestCase, BaseDBIntegrationTest):

@@ -47,11 +47,12 @@ class TestProjectController(GenericControllerTest, BaseAPITest):
         # then
         tasks_response = response.json
         self.assertEqual(200, response.status_code, response.text)
-        self.assertEqual(2, len(tasks_response))
+        self.assertEqual(1, len(tasks_response))
         self.assertEqual(str(FIRST_DEFAULT_ID), tasks_response[0]["id"])
-        self.assertEqual(str(SECOND_DEFAULT_ID), tasks_response[1]["id"])
+        self.assertEqual(1, len(tasks_response[0]["children"]))
         self.assertEqual("Task 1", tasks_response[0]["name"])
-        self.assertEqual("Task 2", tasks_response[1]["name"])
+        self.assertEqual(str(SECOND_DEFAULT_ID), tasks_response[0]["children"][0]["id"])
+        self.assertEqual("Task 2", tasks_response[0]["children"][0]["name"])
 
     def test_get_tasks_by_project_not_found(self):
         # given

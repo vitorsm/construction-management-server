@@ -1,7 +1,9 @@
 from unittest import TestCase
 from unittest.mock import Mock
+from uuid import uuid4
 
 from src.entities.exceptions.entity_not_found_exception import EntityNotFoundException
+from src.entities.exceptions.invalid_entity_exception import InvalidEntityException
 from src.entities.exceptions.permission_exception import PermissionException
 from src.entities.generic_entity import GenericEntity
 from src.entities.task import Task, TaskStatus
@@ -111,3 +113,44 @@ class TestTaskService(GenericServiceTest, TestCase):
         project_id = self.valid_project.id
         task_histories = [task_mock.get_task_history()]
         self.task_repository.find_task_histories_by_project(project_id)
+
+    def test_create_task_with_parent(self):
+        # given
+        task = task_mock.get_valid_task(parent_task_id=uuid4(), project=self.valid_project)
+        parent_task = task_mock.get_valid_task(tid=task.parent_task_id, project=self.valid_project)
+
+        self.task_repository.find_by_id.return_value = parent_task
+
+        # when
+        self.service.create(task)
+
+        # then
+        self.get_repository().create.assert_called_with(task)
+
+    def test_create_task_with_parent_and_different_project(self):
+        # given
+        task = task_mock.get_valid_task(parent_task_id=uuid4(), project=self.valid_project)
+        parent_task = task_mock.get_valid_task(tid=task.parent_task_id)
+
+        self.task_repository.find_by_id.return_value = parent_task
+
+        # when
+        with self.assertRaises(InvalidEntityException) as ex:
+            self.service.create(task)
+
+        # then
+        self.assertIn("project", str(ex.exception))
+
+    def test_create_task_with_parent_and_not_found(self):
+        # given
+        task = task_mock.get_valid_task(parent_task_id=uuid4(), project=self.valid_project)
+        parent_task = task_mock.get_valid_task(tid=task.parent_task_id, project=self.valid_project)
+
+        self.task_repository.find_by_id.return_value = None
+
+        # when
+        with self.assertRaises(EntityNotFoundException) as ex:
+            self.service.create(task)
+
+        # then
+        self.assertIn(str(parent_task.id), str(ex.exception))

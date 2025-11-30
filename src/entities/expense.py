@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from enum import Enum
 from typing import List, Optional
+from uuid import UUID
 
 from src.entities.exceptions.invalid_entity_exception import InvalidEntityException
 from src.entities.generic_entity import GenericEntity
@@ -28,9 +29,10 @@ class Expense(GenericEntity):
     expense_class: ExpenseClass
     items: List[Item]
     value: float
-    files: List[str]
+    files: List[UUID]
     notes: Optional[str]
     project: Project
+    task_id: Optional[UUID]
 
     def _get_invalid_fields(self) -> List[str]:
         invalid_fields = []

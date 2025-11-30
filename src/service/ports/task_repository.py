@@ -1,5 +1,5 @@
 import abc
-from typing import List
+from typing import List, Optional
 from uuid import UUID
 
 from src.entities.task import Task, TaskHistory
@@ -13,7 +13,7 @@ class TaskRepository(GenericEntityRepository, metaclass=abc.ABCMeta):
         raise NotImplementedError
 
     @abc.abstractmethod
-    def find_by_project(self, project_id: UUID) -> List[Task]:
+    def find_by_project(self, project_id: UUID, fill_expenses: bool = False) -> List[Task]:
         raise NotImplementedError
 
     @abc.abstractmethod

@@ -20,15 +20,16 @@ def get_valid_expense(eid: UUID = None, name: str = "Expense 1",
                       expense_type: ExpenseType = ExpenseType.MATERIAL,
                       expense_class: ExpenseClass = ExpenseClass.EXECUTION, items: List[Item] = None,
                       value: float = 10, files: List = None, notes: str = None,
-                      project: Project = project_mock.get_valid_project()) -> Expense:
+                      project: Project = project_mock.get_valid_project(), task_id: UUID = None) -> Expense:
     eid = eid if eid is not None else eid
     items = items if items is not None else [item_mock.get_valid_item()]
     files = files if files is not None else []
 
 
-    return Expense(id=eid, name=name, workspace=workspace, created_at=created_at, updated_at=updated_at, deleted_at=deleted_at,
-                   created_by=created_by, updated_by=updated_by, expense_type=expense_type,
-                   expense_class=expense_class, items=items, value=value, files=files, notes=notes, project=project)
+    return Expense(id=eid, name=name, workspace=workspace, created_at=created_at, updated_at=updated_at,
+                   deleted_at=deleted_at, created_by=created_by, updated_by=updated_by, expense_type=expense_type,
+                   expense_class=expense_class, items=items, value=value, files=files, notes=notes, project=project,
+                   task_id=task_id)
 
 
 def get_default_expense() -> Expense:
@@ -36,4 +37,4 @@ def get_default_expense() -> Expense:
                              created_by=user_mock.get_default_user(), updated_by=user_mock.get_default_user(),
                              workspace=workspace_mock.get_default_workspace(),
                              value=100, notes="Initial expense", items=[item_mock.get_default_item()],
-                             project=project_mock.get_default_project())
+                             project=project_mock.get_default_project(), task_id=FIRST_DEFAULT_ID)

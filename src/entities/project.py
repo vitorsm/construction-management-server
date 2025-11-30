@@ -2,7 +2,6 @@ from dataclasses import dataclass
 from typing import Optional, List
 from uuid import UUID
 
-from src.entities.exceptions.invalid_entity_exception import InvalidEntityException
 from src.entities.generic_entity import GenericEntity
 
 

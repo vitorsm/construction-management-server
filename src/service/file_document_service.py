@@ -10,7 +10,7 @@ from src.service.ports.generic_entity_repository import GenericEntityRepository
 from src.service.ports.workspace_repository import WorkspaceRepository
 
 
-class FileDocumentService(GenericService):
+class FileDocumentService(GenericService[FileDocument]):
 
     def __init__(self, authentication_repository: AuthenticationRepository, workspace_repository: WorkspaceRepository,
                  file_document_repository: FileDocumentRepository):
@@ -34,7 +34,7 @@ class FileDocumentService(GenericService):
         entity = self.__file_document_repository.find_by_id(file_document_id, fill_file=fill_file)
 
         if not entity:
-            raise EntityNotFoundException(self.__get_entity_type_name(), str(file_document_id))
+            raise EntityNotFoundException(FileDocument.__name__, str(file_document_id))
 
         self._check_permission(entity, self.get_authentication_repository().get_current_user(), {})
 

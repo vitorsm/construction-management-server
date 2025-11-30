@@ -78,8 +78,10 @@ class TaskDB(GenericEntityDB, Base[Task]):
     status = Column(String(100), nullable=False)
     progress = Column(Float, nullable=False)
     project_id = Column(UUID, ForeignKey("project.id"), nullable=True)
+    parent_task_id = Column(UUID, ForeignKey("task.id"), nullable=False)
 
     project_db = relationship("ProjectDB", foreign_keys=[project_id], lazy="joined")
+    expenses_db = relationship("ExpenseDB", back_populates="task_db")
     # files: List[str]
     # task_history: List[TaskHistory]
 
@@ -96,8 +98,9 @@ class TaskDB(GenericEntityDB, Base[Task]):
         self.status = task.status.name
         self.progress = task.progress
         self.project_id = task.project.id
+        self.parent_task_id = task.parent_task_id
 
-    def to_entity(self) -> Task:
+    def to_entity(self, fill_expenses: bool = False) -> Task:
         task = object.__new__(Task)
         task.planned_start_date = self.planned_start_date
         task.planned_end_date = self.planned_end_date
@@ -108,6 +111,11 @@ class TaskDB(GenericEntityDB, Base[Task]):
         task.files = []
         task.task_history = []
         task.project = self.project_db.to_entity()
+        task.parent_task_id = self.parent_task_id
+        task.expenses = []
+
+        if fill_expenses:
+            task.expenses = [expense_db.to_entity() for expense_db in self.expenses_db if expense_db.deleted_at is None]
 
         self.fill_entity(task)
 

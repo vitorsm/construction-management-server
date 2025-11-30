@@ -18,7 +18,7 @@ def get_valid_task(tid: UUID = None, name: str = "Task 1", workspace: Workspace 
                    planned_start_date: datetime = None, planned_end_date: datetime = None, actual_start_date: datetime = None,
                    actual_end_date: datetime = None, status: TaskStatus = TaskStatus.IN_PROGRESS, progress: float = 40,
                    files: List[str] = None, task_history: List[TaskHistory] = None,
-                   project: Project = project_mock.get_valid_project()) -> Task:
+                   project: Project = project_mock.get_valid_project(), parent_task_id: UUID = None) -> Task:
     tid = tid if tid is not None else uuid4()
     files = files if files is not None else []
     task_history = task_history if task_history is not None else []
@@ -26,7 +26,7 @@ def get_valid_task(tid: UUID = None, name: str = "Task 1", workspace: Workspace 
     return Task(id=tid, name=name, workspace=workspace, created_at=created_at, updated_at=updated_at, deleted_at=deleted_at,
                 created_by=created_by, updated_by=updated_by, planned_start_date=planned_start_date, planned_end_date=planned_end_date,
                 actual_start_date=actual_start_date, actual_end_date=actual_end_date, status=status, progress=progress, files=files,
-                task_history=task_history, project=project)
+                task_history=task_history, project=project, parent_task_id=parent_task_id, expenses=[])
 
 
 def get_task_history(hid: UUID = uuid4(), created_at: datetime = now, progress: float = 15, files: List[str] = None,

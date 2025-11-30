@@ -26,12 +26,14 @@ class ExpenseMapper(GenericMapper[Expense]):
         created_by = User.obj_id(uuid_mapper.to_uuid(dto.get("created_by").get("id"))) if dto.get("created_by") else None
         updated_by = User.obj_id(uuid_mapper.to_uuid(dto.get("updated_by").get("id"))) if dto.get("updated_by") else None
         project = Project.obj_id(uuid_mapper.to_uuid(dto.get("project").get("id"))) if dto.get("project") else None
+        files = [uuid_mapper.to_uuid(file) for file in dto.get("files", [])] if dto.get("files") else []
+        task_id = uuid_mapper.to_uuid(dto.get("task_id"))
 
         return Expense(id=uuid_mapper.to_uuid(dto.get("id")), name=dto.get("name"), workspace=workspace,
                     expense_type=expense_type, expense_class=expense_class, items=items,
-                    value=dto.get("value"), files=dto.get("files", []), notes=dto.get("notes"),
+                    value=dto.get("value"), files=files, notes=dto.get("notes"),
                     created_at=created_at, updated_at=updated_at, deleted_at=deleted_at,
-                    created_by=created_by, updated_by=updated_by, project=project)
+                    created_by=created_by, updated_by=updated_by, project=project, task_id=task_id)
 
 
     @staticmethod
@@ -46,9 +48,11 @@ class ExpenseMapper(GenericMapper[Expense]):
             "project": {"id": str(expense.project.id)},
             "expense_type": expense.expense_type.name,
             "expense_class": expense.expense_class.name,
-            "items": [{"id": str(item.id)} for item in expense.items] if expense.items else [],
+            "task_id": str(expense.task_id) if expense.task_id else None,
+            "items": [{"id": str(item.id), "name": item.name, "unit_of_measurement": item.unit_of_measurement}
+                      for item in expense.items] if expense.items else [],
             "value": expense.value,
-            "files": expense.files,
+            "files": [str(file_id) for file_id in expense.files],
             "notes": expense.notes,
             "created_at": date_utils.datetime_to_iso(expense.created_at),
             "updated_at": date_utils.datetime_to_iso(expense.updated_at),

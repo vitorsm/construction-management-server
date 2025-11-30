@@ -23,9 +23,10 @@ class PostgresGenericRepository(GenericEntityRepository, Generic[Entity, DBModel
         raise NotImplementedError
 
     def get_session(self) -> Session:
-        db_instance = self.get_db_instance()
-        db_engine = db_instance.get_db_engine()
-        return sessionmaker(autocommit=False, autoflush=False, bind=db_engine)()
+        # db_instance = self.get_db_instance()
+        # db_engine = db_instance.get_db_engine()
+        # return sessionmaker(autocommit=False, autoflush=False, bind=db_engine)()
+        return self.get_db_instance().get_session()
 
     def create(self, entity: Entity):
         model_db_type = self.__get_db_model_type()

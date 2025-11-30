@@ -65,37 +65,6 @@ CREATE TABLE item (
     FOREIGN KEY (workspace_id) REFERENCES workspace(id)
 );
 
-CREATE TABLE expense (
-    id UUID NOT NULL,
-    name TEXT NOT NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-    updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
-    deleted_at TIMESTAMP NULL DEFAULT NULL,
-    created_by UUID NOT NULL,
-    updated_by UUID NOT NULL,
-    workspace_id UUID NOT NULL,
-    expense_type VARCHAR(100) NOT NULL,
-    expense_class VARCHAR(100) NOT NULL,
-    value FLOAT NOT NULL,
-    notes TEXT NULL,
-    project_id UUID NOT NULL,
-
-    PRIMARY KEY (id),
-    FOREIGN KEY (created_by) REFERENCES "user"(id),
-    FOREIGN KEY (updated_by) REFERENCES "user"(id),
-    FOREIGN KEY (workspace_id) REFERENCES workspace(id),
-    FOREIGN KEY (project_id) REFERENCES project(id)
-);
-
-CREATE TABLE expense_has_item (
-    expense_id UUID NOT NULL,
-    item_id UUID NOT NULL,
-
-    PRIMARY KEY (expense_id, item_id),
-    FOREIGN KEY (expense_id) REFERENCES expense(id),
-    FOREIGN KEY (item_id) REFERENCES item(id)
-);
-
 CREATE TABLE task (
     id UUID NOT NULL,
     name TEXT NOT NULL,
@@ -112,12 +81,14 @@ CREATE TABLE task (
     status VARCHAR(100) NOT NULL,
     progress FLOAT NOT NULL,
     project_id UUID NOT NULL,
+    parent_task_id UUID NULL,
 
     PRIMARY KEY (id),
     FOREIGN KEY (created_by) REFERENCES "user"(id),
     FOREIGN KEY (updated_by) REFERENCES "user"(id),
     FOREIGN KEY (workspace_id) REFERENCES workspace(id),
-    FOREIGN KEY (project_id) REFERENCES project(id)
+    FOREIGN KEY (project_id) REFERENCES project(id),
+    FOREIGN KEY (parent_task_id) REFERENCES task(id)
 );
 
 CREATE TABLE task_history (
@@ -132,6 +103,39 @@ CREATE TABLE task_history (
     PRIMARY KEY (id),
     FOREIGN KEY (task_id) REFERENCES task(id),
     FOREIGN KEY (created_by) REFERENCES "user"(id)
+);
+
+CREATE TABLE expense (
+    id UUID NOT NULL,
+    name TEXT NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    deleted_at TIMESTAMP NULL DEFAULT NULL,
+    created_by UUID NOT NULL,
+    updated_by UUID NOT NULL,
+    workspace_id UUID NOT NULL,
+    expense_type VARCHAR(100) NOT NULL,
+    expense_class VARCHAR(100) NOT NULL,
+    value FLOAT NOT NULL,
+    notes TEXT NULL,
+    project_id UUID NOT NULL,
+    task_id UUID NULL,
+
+    PRIMARY KEY (id),
+    FOREIGN KEY (created_by) REFERENCES "user"(id),
+    FOREIGN KEY (updated_by) REFERENCES "user"(id),
+    FOREIGN KEY (workspace_id) REFERENCES workspace(id),
+    FOREIGN KEY (project_id) REFERENCES project(id),
+    FOREIGN KEY (task_id) REFERENCES task(id) ON DELETE SET NULL
+);
+
+CREATE TABLE expense_has_item (
+    expense_id UUID NOT NULL,
+    item_id UUID NOT NULL,
+
+    PRIMARY KEY (expense_id, item_id),
+    FOREIGN KEY (expense_id) REFERENCES expense(id),
+    FOREIGN KEY (item_id) REFERENCES item(id)
 );
 
 CREATE TABLE file_document (
@@ -157,5 +161,14 @@ CREATE TABLE task_history_has_file (
 
     PRIMARY KEY (task_history_id, file_document_id),
     FOREIGN KEY (task_history_id) REFERENCES task_history(id),
+    FOREIGN KEY (file_document_id) REFERENCES file_document(id)
+);
+
+CREATE TABLE expense_has_file (
+    expense_id UUID NOT NULL,
+    file_document_id UUID NOT NULL,
+
+    PRIMARY KEY (expense_id, file_document_id),
+    FOREIGN KEY (expense_id) REFERENCES expense(id),
     FOREIGN KEY (file_document_id) REFERENCES file_document(id)
 );

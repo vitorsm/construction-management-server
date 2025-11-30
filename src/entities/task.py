@@ -5,6 +5,7 @@ from typing import List, Optional
 from uuid import UUID, uuid4
 
 from src.entities.exceptions.invalid_entity_exception import InvalidEntityException
+from src.entities.expense import Expense
 from src.entities.generic_entity import GenericEntity
 from src.entities.project import Project
 from src.entities.user import User
@@ -55,6 +56,11 @@ class Task(GenericEntity):
     files: List[str]
     task_history: List[TaskHistory]
     project: Project
+    parent_task_id: Optional[UUID]
+    expenses: List[Expense] = None
+
+    # transient
+    children_tasks: Optional[List['Task']] = None
 
     def _get_invalid_fields(self) -> List[str]:
         invalid_fields = []
@@ -90,3 +96,19 @@ class Task(GenericEntity):
         self.progress = task_history.progress
         self.task_history.append(task_history)
         self.status = task_history.status
+
+    def add_child_task(self, task: 'Task'):
+        if self.children_tasks is None:
+            self.children_tasks = []
+
+        self.children_tasks.append(task)
+
+    def get_expenses_value(self) -> float:
+        self_expense_values = sum(expense.value for expense in self.expenses) if self.expenses else 0
+
+        if self.children_tasks:
+            for child_task in self.children_tasks:
+                self_expense_values += child_task.get_expenses_value()
+
+        return self_expense_values
+

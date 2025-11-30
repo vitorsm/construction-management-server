@@ -27,6 +27,7 @@ class TestTaskController(GenericControllerTest, BaseAPITest):
         dto["status"] = "IN_PROGRESS"
         dto["actual_start_date"] = "2024-07-02T10:00:00Z"
         dto["actual_end_date"] = None
+        dto["task_parent_id"] = str(SECOND_DEFAULT_ID)
 
         return dto
 
@@ -39,6 +40,7 @@ class TestTaskController(GenericControllerTest, BaseAPITest):
 
         dto3 = self.get_valid_entity()
         dto3["status"] = "INVALID_STATUS"
+        dto3["parent_task_id"] = str(SECOND_DEFAULT_ID)
 
         return [dto1, dto2, dto3]
 
@@ -50,6 +52,7 @@ class TestTaskController(GenericControllerTest, BaseAPITest):
         self.assertEqual(entity1["actual_end_date"], entity2["actual_end_date"])
         self.assertEqual(entity1["status"], entity2["status"])
         self.assertEqual(entity1["project"]["id"], entity2["project"]["id"])
+        self.assertEqual(entity1.get("expenses_value"), entity2.get("expenses_value"))
 
     def get_address(self, entity_id: str = None) -> str:
         return f"/api/tasks/{entity_id}" if entity_id else "/api/tasks"
@@ -106,3 +109,30 @@ class TestTaskController(GenericControllerTest, BaseAPITest):
         # then
         response_data = response.json
         self.assertEqual(404, response.status_code, response.text)
+
+    def test_update_with_invalid_parent(self):
+        # given
+        task = self.get_changed_entity()
+        task["parent_task_id"] = str(uuid4())
+        address = self.get_address()
+
+        # when
+        response = self.client.post(address, json=task, headers=self.get_default_headers())
+
+        # then
+        response_data = response.json
+        self.assertEqual(404, response.status_code, response.text)
+
+    def test_get_entity_check_start_end_date(self):
+        # given
+        entity_id = str(FIRST_DEFAULT_ID)
+        address = self.get_address(entity_id)
+
+        # when
+        response = self.client.get(address, headers=self.get_default_headers())
+
+        # then
+        self.assertEqual(200, response.status_code, response.text)
+        payload = response.json
+        self.assertEqual('2025-11-04T10:31:00', payload["start_date"])
+        self.assertEqual('2025-11-05T10:31:00', payload["end_date"])

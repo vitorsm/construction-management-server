@@ -1,8 +1,10 @@
 from datetime import datetime
 from uuid import uuid4
 
+from src.adapters.postgres import ExpenseDB
 from src.adapters.postgres.dto.task_db import TaskHistoryDB
 from src.adapters.postgres.postgres_task_repository import PostgresTaskRepository
+from src.entities.expense import ExpenseType, ExpenseClass
 from src.entities.task import Task, TaskStatus, TaskHistory
 from tests.integration_tests.adapters.postgres.generic_entity_repository_test import GenericEntityRepositoryTest
 from tests.integration_tests.base_sql_alchemy_test import BaseSQLAlchemyTest
@@ -31,6 +33,7 @@ class TestPostgresTaskRepository(GenericEntityRepositoryTest, BaseSQLAlchemyTest
         task.planned_end_date = None
         task.actual_start_date = None
         task.actual_end_date = None
+        task.parent_task_id = FIRST_DEFAULT_ID
         return task
 
     def get_changed_entity(self) -> Task:
@@ -49,13 +52,14 @@ class TestPostgresTaskRepository(GenericEntityRepositoryTest, BaseSQLAlchemyTest
         self.assertEqual(entity1.actual_start_date, entity2.actual_start_date)
         self.assertEqual(entity1.actual_end_date, entity2.actual_end_date)
         self.assertEqual(entity1.project, entity2.project)
+        self.assertEqual(entity1.parent_task_id, entity2.parent_task_id)
 
     def test_find_tasks_by_project(self):
         # given
         project_id = FIRST_DEFAULT_ID
 
         # when
-        tasks = self.repository.find_by_project(project_id)
+        tasks = self.repository.find_by_project(project_id, fill_expenses=True)
 
         # then
         self.assertEqual(2, len(tasks))
@@ -63,6 +67,10 @@ class TestPostgresTaskRepository(GenericEntityRepositoryTest, BaseSQLAlchemyTest
         self.assertEqual(SECOND_DEFAULT_ID, tasks[1].id)
         self.assertEqual("Task 1", tasks[0].name)
         self.assertEqual("Task 2", tasks[1].name)
+        self.assertEqual(1, len(tasks[0].expenses))
+        self.assertEqual("Expense 1", tasks[0].expenses[0].name)
+        self.assertEqual(ExpenseType.MATERIAL, tasks[0].expenses[0].expense_type)
+        self.assertEqual(ExpenseClass.EXECUTION, tasks[0].expenses[0].expense_class)
 
     def test_find_tasks_by_project_emtpy(self):
         # given
@@ -113,3 +121,14 @@ class TestPostgresTaskRepository(GenericEntityRepositoryTest, BaseSQLAlchemyTest
 
         # then
         self.assertEqual(0, len(task_histories))
+
+    def test_delete_task_with_expense(self):
+        # given
+        task = task_mock.get_default_task()
+
+        # when
+        self.repository.delete(task)
+
+        # then
+        expense_db = self._get_session().get_one(ExpenseDB, FIRST_DEFAULT_ID)
+        self.assertIsNone(expense_db.task_id)

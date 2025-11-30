@@ -7,6 +7,7 @@ from flask_jwt_extended import jwt_required
 from injector import Injector
 
 from src.application.api.mappers import uuid_mapper
+from src.application.api.mappers.generic_mapper import GenericMapper
 from src.entities.exceptions.invalid_entity_exception import InvalidEntityException
 from src.service.generic_service import GenericService
 
@@ -113,7 +114,7 @@ class GenericEntityController(Generic[EntityService, EntityMapper], metaclass=ab
 
             mapper = self.__get_mapper_type()
 
-            return jsonify([mapper.to_dto(entity) for entity in entities])
+            return jsonify(GenericMapper.to_dtos(entities, mapper.to_dto))
 
     def __get_entity_service(self) -> GenericService:
         entity_service_type = self.__get_service_type()

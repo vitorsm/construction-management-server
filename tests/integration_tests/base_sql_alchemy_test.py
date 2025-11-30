@@ -2,6 +2,7 @@ from unittest import TestCase
 
 from flask import Flask
 from sqlalchemy import create_engine, text, Engine
+from sqlalchemy.orm import Session, sessionmaker
 
 from src.adapters.postgres.db_instance import DBInstance
 from tests.integration_tests.base_db_integration_test import BaseDBIntegrationTest
@@ -16,6 +17,9 @@ class TestDBInstance(DBInstance):
 
     def get_db_engine(self) -> Engine:
         return self.db_engine
+
+    def get_session(self) -> Session:
+        return sessionmaker(autocommit=False, autoflush=False, bind=self.db_engine)()
 
 
 

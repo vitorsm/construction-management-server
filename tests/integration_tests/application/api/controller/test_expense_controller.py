@@ -52,6 +52,7 @@ class TestExpenseController(BaseAPITest, GenericControllerTest):
         self.assertEqual(entity1["value"], entity2["value"])
         self.assertEqual(entity1["items"], entity2["items"])
         self.assertEqual(entity1["project"]["id"], entity2["project"]["id"])
+        self.assertEqual(entity1["task_id"], entity2["task_id"])
 
     def get_address(self, entity_id: str = None) -> str:
         return f"/api/expenses/{entity_id}" if entity_id else "/api/expenses"

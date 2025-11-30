@@ -51,4 +51,8 @@ coverage html
 ```
 
 ## TODO
-1. Show task history even if the task is deleted
+1. Add endpoint to fetch project dash (planned cost, actual cost, start date, end date, actual tasks finished, planned tasks finished)
+2. Add parent to task
+3. Add task to expense
+4. Calculate task cost
+5. Show task history even if the task is deleted

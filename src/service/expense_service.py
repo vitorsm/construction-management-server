@@ -5,6 +5,7 @@ from src.entities.exceptions.entity_not_found_exception import EntityNotFoundExc
 from src.entities.exceptions.invalid_entity_exception import InvalidEntityException
 from src.entities.exceptions.permission_exception import PermissionException
 from src.entities.expense import Expense
+from src.entities.expense_project_details import ExpenseProjectDetails
 from src.service.generic_service import GenericService
 from src.service.item_service import ItemService
 from src.service.ports.authentication_repository import AuthenticationRepository
@@ -55,3 +56,6 @@ class ExpenseService(GenericService[Expense]):
         # get project to ensure permission and it exists
         project = self.__project_service.find_by_id(project_id)
         return self.__expense_repository.find_by_project(project.id)
+
+    def get_expense_project_details(self, project_id: UUID) -> ExpenseProjectDetails:
+        return ExpenseProjectDetails(self.find_expenses_by_project(project_id))

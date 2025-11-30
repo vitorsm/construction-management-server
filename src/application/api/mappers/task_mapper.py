@@ -1,7 +1,7 @@
-from typing import Optional
+from typing import Optional, List
 
 from src.application.api.mappers import uuid_mapper
-from src.application.api.mappers.generic_mapper import GenericMapper, Entity
+from src.application.api.mappers.generic_mapper import GenericMapper
 from src.entities.project import Project
 from src.entities.task import Task, TaskStatus
 from src.entities.user import User
@@ -25,17 +25,39 @@ class TaskMapper(GenericMapper[Task]):
         actual_end_date = date_utils.iso_to_datetime(dto.get("actual_end_date"))
         status = enum_utils.instantiate_enum_from_str_name(TaskStatus, dto.get("status"))
         project = Project.obj_id(uuid_mapper.to_uuid(dto.get("project").get("id"))) if dto.get("project") else None
+        parent_task_id = uuid_mapper.to_uuid(dto.get("parent_task_id"))
 
         return Task(id=uuid_mapper.to_uuid(dto.get("id")), name=dto.get("name"), workspace=workspace,
                     created_at=created_at, updated_at=updated_at, deleted_at=deleted_at, created_by=created_by,
                     updated_by=updated_by, planned_start_date=planned_start_date, planned_end_date=planned_end_date,
                     actual_start_date=actual_start_date, actual_end_date=actual_end_date, status=status,
-                    progress=dto.get("progress"), files=dto.get("files"), task_history=[], project=project)
+                    progress=dto.get("progress"), files=dto.get("files"), task_history=[], project=project,
+                    parent_task_id=parent_task_id)
+
+    @staticmethod
+    def to_dtos_tree(tasks: List[Task]) -> List[dict]:
+        tasks_by_id = {task.id: task for task in tasks}
+        root_tasks = []
+        for task in tasks:
+            if task.parent_task_id and task.parent_task_id in tasks_by_id:
+                tasks_by_id[task.parent_task_id].add_child_task(task)
+            else:
+                root_tasks.append(task)
+
+        return GenericMapper.to_dtos(root_tasks, TaskMapper.to_dto)
 
     @staticmethod
     def to_dto(task: Optional[Task]) -> Optional[dict]:
         if not task:
             return None
+
+        children = []
+        if task.children_tasks:
+            for child in task.children_tasks:
+                children.append(TaskMapper.to_dto(child))
+
+        start_date = task.actual_start_date if task.actual_start_date else task.planned_start_date
+        end_date = task.actual_end_date if task.actual_end_date else task.planned_end_date
 
         return {
             "id": str(task.id),
@@ -47,11 +69,16 @@ class TaskMapper(GenericMapper[Task]):
             "deleted_at": date_utils.datetime_to_iso(task.deleted_at),
             "created_by": {"id": str(task.created_by.id)},
             "updated_by": {"id": str(task.updated_by.id)},
+            "start_date": date_utils.datetime_to_iso(start_date),
+            "end_date": date_utils.datetime_to_iso(end_date),
             "planned_start_date": date_utils.datetime_to_iso(task.planned_start_date),
             "planned_end_date": date_utils.datetime_to_iso(task.planned_end_date),
             "actual_start_date": date_utils.datetime_to_iso(task.actual_start_date),
             "actual_end_date": date_utils.datetime_to_iso(task.actual_end_date),
             "status": task.status.name,
             "progress": task.progress,
-            "files": task.files
+            "files": task.files,
+            "children": children,
+            "parent_task_id": str(task.parent_task_id) if task.parent_task_id else None,
+            "expenses_values": task.get_expenses_value()
         }
