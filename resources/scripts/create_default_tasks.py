@@ -17,15 +17,15 @@ INSERT_EXPENSE = "INSERT INTO expense (id, name, created_at, updated_at, deleted
 DB_NAME = os.environ.get("DB_NAME", "construction_management")
 DB_USER = os.environ.get("DB_USER", "admin")
 DB_PASS = os.environ.get("DB_PASS", "password")
-DB_HOST = os.environ.get("DB_HOST", "172.21.0.2")
+DB_HOST = os.environ.get("DB_HOST", "127.0.0.1")
 
 INPUT_FILE_PATH = "default_tasks.json"
-PROJECT_ID = "d10fe31e-d05d-46ba-9482-8128d586b084"
+PROJECT_ID = "d668aa6e-5775-4d8f-94d2-8d9df2c845a1"
 USER_ID = "10000000-0000-0000-0000-000000000001"
 WORKSPACE_ID = "f0ae47da-7352-455c-a3ad-02e7fb8d29c9"
 PROJECT_START_DATE = datetime(year=2025, month=4, day=1)
-# DAY_TO_COMPLETE_TASK = datetime(year=2025, month=10, day=30)
-DAY_TO_COMPLETE_TASK = None
+DAY_TO_COMPLETE_TASK = datetime(year=2025, month=10, day=30)
+# DAY_TO_COMPLETE_TASK = None
 ONE_TO_N_EXPENSE_DONE = 2
 MARGIN_PRICE_EXPENSE = 0.5
 NOW = datetime.now()

@@ -101,9 +101,9 @@ class TestProjectController(GenericControllerTest, BaseAPITest):
         feed_items = response.json
         self.assertEqual(200, response.status_code, response.text)
         self.assertEqual(2, len(feed_items))
-        self.assertEqual("Started working on the task", feed_items[0]["notes"])
-        self.assertEqual(10, feed_items[0]["progress"])
-        self.assertEqual("IN_PROGRESS", feed_items[0]["status"])
+        self.assertEqual("Made significant progress", feed_items[0]["notes"])
+        self.assertEqual(40, feed_items[0]["progress"])
+        self.assertEqual("DONE", feed_items[0]["status"])
         self.assertEqual(str(FIRST_DEFAULT_ID), feed_items[0]["created_by"]["id"])
         self.assertEqual("User 1", feed_items[0]["created_by"]["name"])
         self.assertEqual("user1", feed_items[0]["created_by"]["login"])
