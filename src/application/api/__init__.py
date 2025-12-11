@@ -27,7 +27,7 @@ app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
     "pool_timeout": 30,       # seconds to wait before giving up
     "pool_recycle": 300,     # refresh connections every 30 min
 }
-
+# print("CORS()")
 CORS(app)
 
 db_instance = FlaskAlchemyDBInstance(app)

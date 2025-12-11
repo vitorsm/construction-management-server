@@ -65,8 +65,12 @@ class PostgresGenericRepository(GenericEntityRepository, Generic[Entity, DBModel
     def find_all(self, workspace_id: UUID) -> list[Entity]:
         session = self.get_session()
         entity_type = self.__get_db_model_type()
-        entities_db = session.query(self.__get_db_model_type()).filter(and_(entity_type.workspace_id == workspace_id,
-                                                                            entity_type.deleted_at == None)).all()
+        db_type = self.__get_db_model_type()
+
+        entities_db = (session.query(db_type).filter(and_(entity_type.workspace_id == workspace_id,
+                                                                            entity_type.deleted_at == None))
+                       .order_by(db_type.name).all())
+
         return [entity_db.to_entity() for entity_db in entities_db]
 
     def __get_entity_type(self) -> Type[Entity]:

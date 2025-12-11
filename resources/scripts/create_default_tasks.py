@@ -14,15 +14,16 @@ INSERT_TASK= "INSERT INTO task (id, name, created_at, updated_at, deleted_at, cr
 INSERT_EXPENSE = "INSERT INTO expense (id, name, created_at, updated_at, deleted_at, created_by, updated_by, workspace_id, project_id, expense_type, expense_class, value, notes, task_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
 
 
-DB_NAME = os.environ.get("DB_NAME", "construction_management")
-DB_USER = os.environ.get("DB_USER", "admin")
-DB_PASS = os.environ.get("DB_PASS", "password")
+DB_NAME = os.environ.get("DB_NAME", "")
+DB_USER = os.environ.get("DB_USER", "")
+DB_PASS = os.environ.get("DB_PASS", "")
 DB_HOST = os.environ.get("DB_HOST", "127.0.0.1")
+DB_PORT = os.environ.get("DB_PORT", "5433")
 
 INPUT_FILE_PATH = "default_tasks.json"
-PROJECT_ID = "d668aa6e-5775-4d8f-94d2-8d9df2c845a1"
+PROJECT_ID = "ea8f1004-7537-4b8c-bad5-5f39bfcc78b1"
 USER_ID = "10000000-0000-0000-0000-000000000001"
-WORKSPACE_ID = "f0ae47da-7352-455c-a3ad-02e7fb8d29c9"
+WORKSPACE_ID = "10000000-0000-0000-0000-000000000001"
 PROJECT_START_DATE = datetime(year=2025, month=4, day=1)
 DAY_TO_COMPLETE_TASK = datetime(year=2025, month=10, day=30)
 # DAY_TO_COMPLETE_TASK = None
@@ -30,7 +31,7 @@ ONE_TO_N_EXPENSE_DONE = 2
 MARGIN_PRICE_EXPENSE = 0.5
 NOW = datetime.now()
 
-conn = psycopg.connect(f"dbname={DB_NAME} user={DB_USER} password={DB_PASS} host={DB_HOST}")
+conn = psycopg.connect(f"dbname={DB_NAME} user={DB_USER} password={DB_PASS} host={DB_HOST} port={DB_PORT}")
 cursor = conn.cursor()
 
 

@@ -9,3 +9,4 @@ PyJWT==2.10.1
 SQLAlchemy==2.0.44
 injector==0.22.0
 flask-cors==6.0.1
+uWSGI==2.0.31

@@ -50,6 +50,11 @@ If you prefer, generate the html page for more details:
 coverage html
 ```
 
+## Deploy
+- Build docker image: ```docker build -t construction-management-server .```
+- Tag the image to the repository: ```docker tag construction-management-server:latest vitorsmoreira/construction-management-server:latest```
+- Push the image: ```docker push vitorsmoreira/construction-management-server:latest```
+
 ## TODO
 1. Tests to endpoint dash, task expense, 
 5. Show task history even if the task is deleted

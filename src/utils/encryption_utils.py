@@ -9,3 +9,6 @@ def encrypt_password(password: str) -> str:
 def check_encrypted_password(password: str, encrypted_password: str) -> bool:
     return bcrypt.checkpw(password.encode("utf-8"), encrypted_password.encode("utf-8"))
 
+
+if __name__ == '__main__':
+    print(encrypt_password("Abc12345"))
