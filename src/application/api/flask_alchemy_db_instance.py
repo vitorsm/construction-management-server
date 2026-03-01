@@ -13,9 +13,6 @@ class FlaskAlchemyDBInstance(DBInstance):
         self.sql_alchemy_instance = SQLAlchemy(self.app)
 
     def __get_sql_alchemy_instance(self) -> SQLAlchemy:
-        # if not self.sql_alchemy_instance:
-        #     self.sql_alchemy_instance = SQLAlchemy(self.app)
-
         return self.sql_alchemy_instance
 
     def get_db_engine(self) -> Engine:

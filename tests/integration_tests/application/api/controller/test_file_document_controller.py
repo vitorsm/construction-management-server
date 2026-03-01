@@ -67,7 +67,6 @@ class TestFileDocumentController(BaseAPITest):
             "name": "File 1"
         }
 
-
         # when
         response = self.client.post(address, data=data, headers=headers, content_type="multipart/form-data")
 

@@ -7,22 +7,9 @@ from src.entities.user import User
 
 class UserMapper(GenericMapper[User]):
 
-    @staticmethod
-    def to_entity(dto: Optional[dict]) -> Optional[Entity]:
-        if not dto:
-            return None
-
-        user_id = uuid_mapper.to_uuid(dto.get("id"))
-        return User(id=user_id, name=dto.get("name"), login=dto.get("login"), password=dto.get("password"))
-
-    @staticmethod
-    def to_dto(user: Optional[User]) -> Optional[dict]:
-        if not user:
-            return None
-
-        return {
-            "id": str(user.id),
-            "name": user.name,
-            "login": user.login,
-            "password": None
-        }
+    @classmethod
+    def to_dto(cls, user: Optional[User]) -> Optional[dict]:
+        dto = super().to_dto(user)
+        if dto:
+            dto["password"] = None
+        return dto
